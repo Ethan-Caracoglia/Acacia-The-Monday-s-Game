@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
+using UnityEngine.InputSystem;
 
 public class Dialogue : MonoBehaviour
 {
@@ -10,6 +12,7 @@ public class Dialogue : MonoBehaviour
     public float textSpeed;
 
     private int index;
+    private bool isMouseDown = false;
 
     // Start is called before the first frame update
     void Start()
@@ -19,10 +22,22 @@ public class Dialogue : MonoBehaviour
         StartDialogue();
     }
 
+    public void GetMouseDown(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            isMouseDown = true;
+        }
+        if (ctx.canceled)
+        {
+            isMouseDown = false;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)) // Need to conver
+        if (isMouseDown) // Need to conver
         {
             if (textComponent.text == lines[index])
             {
