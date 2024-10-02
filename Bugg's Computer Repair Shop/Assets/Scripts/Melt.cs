@@ -11,7 +11,9 @@ public class Melt : MonoBehaviour
     // This should NOT be how we do this
     public SpriteRenderer spr;
 
-    public float meltRate = 0.4f;
+    [SerializeField] float meltRate = 0.4f;
+
+    [SerializeField] float minSize = 0.3f;
 
     [SerializeField] BasicWin b;
     // Start is called before the first frame update
@@ -23,7 +25,7 @@ public class Melt : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.localScale.x <= .3 || transform.localScale.y <= .3)
+        if (transform.localScale.x <= minSize || transform.localScale.y <= minSize)
         {
             b.updateIceCount();
             Destroy(gameObject);
@@ -56,13 +58,8 @@ public class Melt : MonoBehaviour
         {
             Debug.Log("melt");
             //check how big the gameobject is, if its not too tiny to reasonably click on, then start scaling it down
-            if (transform.localScale.x > .3 && transform.localScale.y > .3)
-            {
                 float meltAmount = meltRate * Time.deltaTime;
-                transform.localScale -= new Vector3(meltAmount, meltAmount, 0);
-
-            }
-
+            transform.localScale -= new Vector3(meltAmount, meltAmount, 0);
         }
 
     }
