@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Dialogue : MonoBehaviour
 {
@@ -39,6 +40,10 @@ public class Dialogue : MonoBehaviour
     {
         if (isMouseDown) // Need to conver
         {
+            if(index >= lines.Length)
+            {
+                SceneManager.LoadScene(1);
+            }
             if (textComponent.text == lines[index])
             {
                 NextLine();
@@ -68,7 +73,7 @@ public class Dialogue : MonoBehaviour
 
     void NextLine()
     {
-        if (index < lines.Length - 1)
+        if (index < lines.Length)
         {
             index++;
             textComponent.text = string.Empty;
@@ -76,6 +81,7 @@ public class Dialogue : MonoBehaviour
         }
         else
         {
+            SceneManager.LoadScene(1);
             gameObject.SetActive(false);
         }
     }
