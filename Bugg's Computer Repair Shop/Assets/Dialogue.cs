@@ -14,6 +14,7 @@ public class Dialogue : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Begins with an empty text box before startin dialouge
         textComponent.text = string.Empty;
         StartDialogue();
     }
@@ -21,7 +22,7 @@ public class Dialogue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0)) // Need to conver
         {
             if (textComponent.text == lines[index])
             {
