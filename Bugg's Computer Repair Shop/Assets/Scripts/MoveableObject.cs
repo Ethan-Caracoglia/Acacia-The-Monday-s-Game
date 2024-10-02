@@ -58,7 +58,8 @@ public class MoveableObject : MonoBehaviour
     /// <param name="newPos"></param>
     public void UpdatePosition(Vector3 newPos)
     {
-        transform.position = newPos;
+        transform.position = new Vector3(newPos.x, newPos.y, transform.position.z);
+
         foreach (var mObj in moveChildren)
         {
             mObj.snapPosition = transform.position + offsets[mObj.id];
