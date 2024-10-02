@@ -7,10 +7,14 @@ using UnityEngine.InputSystem;
 public class Melt : MonoBehaviour
 {
     private bool isMouseDown;
+
+    // This should NOT be how we do this
     public SpriteRenderer spr;
 
-    // Start is called before the first frame update
+    public float meltRate = 0.4f;
 
+    [SerializeField] BasicWin b;
+    // Start is called before the first frame update
     void Start()
     {
 
@@ -21,6 +25,7 @@ public class Melt : MonoBehaviour
     {
         if (transform.localScale.x <= .3 || transform.localScale.y <= .3)
         {
+            b.updateIceCount();
             Destroy(gameObject);
         }
     }
@@ -40,6 +45,8 @@ public class Melt : MonoBehaviour
         }
     }
 
+
+
     //prebuilt method, Checks for hovering on the collider.
     private void OnMouseOver()
     {
@@ -51,10 +58,11 @@ public class Melt : MonoBehaviour
             //check how big the gameobject is, if its not too tiny to reasonably click on, then start scaling it down
             if (transform.localScale.x > .3 && transform.localScale.y > .3)
             {
-                transform.localScale -= new Vector3(.005f, .005f, 0);
+                float meltAmount = meltRate * Time.deltaTime;
+                transform.localScale -= new Vector3(meltAmount, meltAmount, 0);
 
             }
-       
+
         }
 
     }
