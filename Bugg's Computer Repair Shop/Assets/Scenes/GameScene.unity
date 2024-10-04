@@ -1175,8 +1175,8 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1143129983}
-        m_TargetAssemblyTypeName: Melt, Assembly-CSharp
+      - m_Target: {fileID: 1995033107}
+        m_TargetAssemblyTypeName: MoveMouse, Assembly-CSharp
         m_MethodName: GetMouseDown
         m_Mode: 0
         m_Arguments:
