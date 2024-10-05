@@ -268,6 +268,8 @@ MonoBehaviour:
   id: ComputerHinge
   covered: 0
   childrenObjs: []
+  sprite: {fileID: 21300000, guid: 12dc06e8c289e3643b50bb0a022155d1, type: 3}
+  highlightSprite: {fileID: 21300000, guid: c4ed63fd2d197b842b1f29a3b5f2fb20, type: 3}
   snapped: 1
   coveredObjs:
   - {fileID: 930387623}
@@ -457,6 +459,8 @@ MonoBehaviour:
   id: Computer_CPU
   covered: 0
   childrenObjs: []
+  sprite: {fileID: 21300000, guid: c81a9dfbce1e0964981be8585ce5aa3f, type: 3}
+  highlightSprite: {fileID: 21300000, guid: 8a49f56f3dd1fd14094c29e90f9580c2, type: 3}
   snapped: 1
   coveredObjs: []
   snapDistance: 0.02
@@ -582,6 +586,8 @@ MonoBehaviour:
   id: Computer_Extra
   covered: 0
   childrenObjs: []
+  sprite: {fileID: 21300000, guid: 50f5b78e1cab8044bb9ee90b8e21516d, type: 3}
+  highlightSprite: {fileID: 21300000, guid: 26b6828e253fe924dafd770dbb447035, type: 3}
   snapped: 1
   coveredObjs: []
   snapDistance: 0.02
@@ -1667,6 +1673,8 @@ MonoBehaviour:
   covered: 0
   childrenObjs:
   - {fileID: 930387623}
+  sprite: {fileID: 21300000, guid: 2f7827bafdf048d429012676854da11b, type: 3}
+  highlightSprite: {fileID: 21300000, guid: 325b30dcadf22614eac76d16d15331da, type: 3}
   snapped: 1
   coveredObjs: []
   snapDistance: 0.02

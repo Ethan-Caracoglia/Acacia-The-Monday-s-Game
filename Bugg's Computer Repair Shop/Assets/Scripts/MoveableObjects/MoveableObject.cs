@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class MoveableObject : ObjInterface
 {
-    
+    public Sprite sprite;
+    public Sprite highlightSprite;
+
     protected bool dragging = false;
 
     public bool snapped = true;
@@ -72,6 +74,16 @@ public class MoveableObject : ObjInterface
             }
         }
         
+    }
+
+    void OnMouseOver()
+    {
+        transform.GetComponent<SpriteRenderer>().sprite = highlightSprite;
+    }
+
+    void OnMouseExit()
+    {
+        transform.GetComponent<SpriteRenderer>().sprite = sprite;
     }
 
     public override void ParentPositionChange(Vector3 newPos)
