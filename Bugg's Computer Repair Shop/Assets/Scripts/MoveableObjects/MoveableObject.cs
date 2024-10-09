@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// Split into "snapping and non-snapping objects: would be nice to move objects on top of others. Not neccessary though.
 public class MoveableObject : ObjInterface
 {
     public Sprite sprite;

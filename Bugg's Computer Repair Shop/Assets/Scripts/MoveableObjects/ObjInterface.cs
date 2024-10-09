@@ -5,6 +5,7 @@ using UnityEngine;
 
 public abstract class ObjInterface : MonoBehaviour
 {
+    public const string EMPTY_OBJ_ID = "EMPTY";
     public string id;
     public bool covered = false;
     public ObjInterface[] childrenObjs;

@@ -10,6 +10,11 @@ public class MoveMouse : MonoBehaviour
     float height;
     float width;
 
+    private static CollisionSorter collisionSorter = new CollisionSorter();
+
+    private bool holdingTool = false;
+    private IInteractable currentHeldObj;
+
     private ContactFilter2D c = new ContactFilter2D();
     private void Start()
     {
@@ -22,7 +27,7 @@ public class MoveMouse : MonoBehaviour
     {
         Vector2 mousePos = ctx.ReadValue<Vector2>();
 
-        transform.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 10)); 
+        transform.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 10));
     }
 
     public void GetMouseDown(InputAction.CallbackContext ctx)
@@ -30,6 +35,34 @@ public class MoveMouse : MonoBehaviour
         Collider2D[] results = new Collider2D[] { };
         Physics2D.OverlapPoint(transform.position, c.NoFilter(), results);
 
+        List<Collider2D> resultList = new List<Collider2D>(results);
+        resultList.Sort(collisionSorter);
+
+        foreach (Collider2D col in resultList)
+        {
+            IInteractable? obj = col.gameObject.GetComponent<IInteractable>();
+            if (obj == null)
+                continue;
+            InteractionState state = new InteractionState(currentHeldObj., currentHeldObj.)
+            obj.TryInteract();
+        }
+
+    }
+
+
+    public bool TrySetCurrentHeldObj(IInteractable obj)
+    {
+        if (holdingObj) return false;
+
+        currentHeldObj = obj;
+        holdingObj = true;
+        return true;
+    }
+
+    // Probably not the optimal way to do this
+    public void SetDownObj()
+    {
+        holdingObj = false;
     }
 
 }

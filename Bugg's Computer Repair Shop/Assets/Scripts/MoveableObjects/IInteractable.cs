@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IInteractable
 {
-    public abstract void TryInteract(/* Type that interacts */);
+    public abstract void TryLMouseDown(InteractionState state);
 }
