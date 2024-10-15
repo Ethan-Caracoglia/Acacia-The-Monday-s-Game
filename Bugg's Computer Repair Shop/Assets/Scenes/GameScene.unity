@@ -270,6 +270,7 @@ MonoBehaviour:
   childrenObjs: []
   sprite: {fileID: 21300000, guid: 12dc06e8c289e3643b50bb0a022155d1, type: 3}
   highlightSprite: {fileID: 21300000, guid: c4ed63fd2d197b842b1f29a3b5f2fb20, type: 3}
+  Holder: {fileID: 0}
   snapped: 1
   coveredObjs:
   - {fileID: 930387623}
@@ -461,6 +462,7 @@ MonoBehaviour:
   childrenObjs: []
   sprite: {fileID: 21300000, guid: c81a9dfbce1e0964981be8585ce5aa3f, type: 3}
   highlightSprite: {fileID: 21300000, guid: 8a49f56f3dd1fd14094c29e90f9580c2, type: 3}
+  Holder: {fileID: 0}
   snapped: 1
   coveredObjs: []
   snapDistance: 0.02
@@ -474,8 +476,8 @@ GameObject:
   m_Component:
   - component: {fileID: 980421153}
   - component: {fileID: 980421154}
-  - component: {fileID: 980421155}
   - component: {fileID: 980421156}
+  - component: {fileID: 980421157}
   m_Layer: 0
   m_Name: Computer_ExtraUnit
   m_TagString: Untagged
@@ -550,27 +552,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &980421155
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 980421152}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.3451376, y: 0.26387578, z: 0.2}
-  m_Center: {x: -0.3861388, y: 0.36556455, z: 0}
 --- !u!114 &980421156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -588,9 +569,55 @@ MonoBehaviour:
   childrenObjs: []
   sprite: {fileID: 21300000, guid: 50f5b78e1cab8044bb9ee90b8e21516d, type: 3}
   highlightSprite: {fileID: 21300000, guid: 26b6828e253fe924dafd770dbb447035, type: 3}
+  Holder: {fileID: 0}
   snapped: 1
   coveredObjs: []
   snapDistance: 0.02
+--- !u!61 &980421157
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 980421152}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.28, y: 1.28}
+    newSize: {x: 1.28, y: 1.28}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.28, y: 1.28}
+  m_EdgeRadius: 0
 --- !u!1 &997582790
 GameObject:
   m_ObjectHideFlags: 0
@@ -1675,6 +1702,7 @@ MonoBehaviour:
   - {fileID: 930387623}
   sprite: {fileID: 21300000, guid: 2f7827bafdf048d429012676854da11b, type: 3}
   highlightSprite: {fileID: 21300000, guid: 325b30dcadf22614eac76d16d15331da, type: 3}
+  Holder: {fileID: 0}
   snapped: 1
   coveredObjs: []
   snapDistance: 0.02

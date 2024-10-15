@@ -10,6 +10,16 @@ public class ImmovableObject : ObjInterface
         UpdatePosition(newPos);
     }
 
+    public override void TryMouseInput(InteractionState state)
+    {
+        return;
+    }
+
+    public override void UpdateMousePosition(Vector3 MousePos)
+    {
+        return;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

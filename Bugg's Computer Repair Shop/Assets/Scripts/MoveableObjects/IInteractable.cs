@@ -4,5 +4,7 @@ using UnityEngine;
 
 public interface IInteractable
 {
-    public abstract void TryLMouseDown(InteractionState state);
+    public abstract void TryMouseInput(InteractionState state);
+    public abstract void UpdateMousePosition(Vector3 MousePos);
+
 }

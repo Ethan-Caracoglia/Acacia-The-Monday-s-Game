@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class ObjInterface : MonoBehaviour
+public abstract class ObjInterface : MonoBehaviour, IInteractable
 {
     public const string EMPTY_OBJ_ID = "EMPTY";
     public string id;
@@ -17,6 +17,7 @@ public abstract class ObjInterface : MonoBehaviour
     /// <param name="newPos"></param>
     public void UpdatePosition(Vector3 newPos)
     {
+        // Potentially make this move to top Z value and drop down?
         Vector3 pos = transform.position = new Vector3(newPos.x, newPos.y, transform.position.z);
 
         foreach (var mObj in childrenObjs)
@@ -26,4 +27,8 @@ public abstract class ObjInterface : MonoBehaviour
     }
 
     public abstract void ParentPositionChange(Vector3 newPos);
+
+    public abstract void TryMouseInput(InteractionState state);
+
+    public abstract void UpdateMousePosition(Vector3 MousePos);
 }
