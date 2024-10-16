@@ -591,8 +591,8 @@ MonoBehaviour:
     m_ActionName: Main/Secondary Action[/Mouse/rightButton]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: e78d30d6-2da6-41e2-9e42-c786da5b3841
-    m_ActionName: Secondary/New action
+    m_ActionId: 1f61aef3-6e53-4642-a038-8a918c84e368
+    m_ActionName: Main/Move[/Mouse/position]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Main
@@ -611,7 +611,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textComponent: {fileID: 350870040}
-  lines: []
+  lines:
+  - Dale you have to help me!
+  - A wizard cast an ice spell nearby and my computer froze!
+  - Please fix it!
   textSpeed: 0
 --- !u!1 &2132110656
 GameObject:
@@ -624,7 +627,6 @@ GameObject:
   - component: {fileID: 2132110657}
   - component: {fileID: 2132110660}
   - component: {fileID: 2132110659}
-  - component: {fileID: 2132110658}
   m_Layer: 5
   m_Name: TextBox
   m_TagString: Untagged
@@ -652,24 +654,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -200}
   m_SizeDelta: {x: -200, y: -600}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2132110658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2132110656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c5e387af9e091f42a6c074ac50ff5ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textComponent: {fileID: 350870040}
-  lines:
-  - Dale! You have to help me!
-  - Some Wizard cast an Ice Spell nearby and now my Computer's frozen!
-  - Help me Please!
-  textSpeed: 0.1
 --- !u!114 &2132110659
 MonoBehaviour:
   m_ObjectHideFlags: 0

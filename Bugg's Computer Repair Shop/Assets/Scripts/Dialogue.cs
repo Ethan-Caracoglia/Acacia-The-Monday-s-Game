@@ -1,88 +1,98 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class Dialogue : MonoBehaviour
 {
     public TextMeshProUGUI textComponent;
-    public string[] lines;
+    public string[] lines;  // Make sure this is populated in the Inspector!
     public float textSpeed;
 
-    private int index;
-    private bool isMouseDown = false;
+    private int index = 0;
+    private bool isTyping = false;  // Track if the current line is typing
+    private bool dialogueEnded = false;  // Ensure no interaction after dialogue ends
 
-    // Start is called before the first frame update
     void Start()
     {
-        // Begins with an empty text box before startin dialouge
+        // Start with an empty text box
         textComponent.text = string.Empty;
-        StartDialogue();
+
+        if (lines.Length > 0)
+        {
+            StartDialogue();
+        }
+        else
+        {
+            Debug.LogWarning("No dialogue lines assigned.");
+        }
     }
 
     public void GetMouseDown(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
+        if (ctx.performed && !dialogueEnded)
         {
-            isMouseDown = true;
-        }
-        if (ctx.canceled)
-        {
-            isMouseDown = false;
+            OnDialogueClick();
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnDialogueClick()
     {
-        if (isMouseDown) // Need to conver
+        if (isTyping)
         {
-            if(index >= lines.Length)
-            {
-                SceneManager.LoadScene(1);
-            }
-            if (textComponent.text == lines[index])
-            {
-                NextLine();
-            }
-            else
-            {
-                StopAllCoroutines();
-                textComponent.text = lines[index];
-            }
+            // Stop the coroutine and finish the current line instantly
+            StopAllCoroutines();
+            textComponent.text = lines[index];  // Display the complete line
+            isTyping = false;
+        }
+        else
+        {
+            // Move to the next line or end the dialogue
+            NextLine();
         }
     }
 
     void StartDialogue()
     {
         index = 0;
+        dialogueEnded = false;
         StartCoroutine(TypeLine());
     }
 
     IEnumerator TypeLine()
     {
+        isTyping = true;
+        textComponent.text = string.Empty;
+
         foreach (char c in lines[index].ToCharArray())
         {
             textComponent.text += c;
             yield return new WaitForSeconds(textSpeed);
         }
+
+        isTyping = false;  // Finished typing the current line
     }
 
     void NextLine()
     {
+        index++;
+
         if (index < lines.Length)
         {
-            index++;
-            textComponent.text = string.Empty;
             StartCoroutine(TypeLine());
         }
         else
         {
-            SceneManager.LoadScene(1);
-            gameObject.SetActive(false);
+            // If no more lines, end the dialogue
+            EndDialogue();
         }
+    }
+
+    void EndDialogue()
+    {
+        dialogueEnded = true;
+        Debug.Log("Dialogue ended.");
+        SceneManager.LoadScene(1);  // Load the next scene
     }
 }
