@@ -88,7 +88,7 @@ public class MoveableObject : ObjInterface
         if (state.Button == MouseButton.MouseLeft && state.ObjId == EMPTY_OBJ_ID)
         {
             // Pick up Object
-            if (state.Ctx.performed)
+            if (state.MouseAction == MouseState.MouseDown)
             {
                 PickUpObject(state.MousePos, state.Sender);
             }

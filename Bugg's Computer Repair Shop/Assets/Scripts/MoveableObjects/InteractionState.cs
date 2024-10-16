@@ -7,24 +7,35 @@ using UnityEngine.InputSystem;
 public struct InteractionState
 {
     public string ObjId;
-    public InputAction.CallbackContext Ctx;
+    public MouseState MouseAction;
     public MouseButton Button;
     public Vector3 MousePos;
     public MoveMouse Sender;
 
-    public InteractionState(string objId, InputAction.CallbackContext ctx, MouseButton button, MoveMouse sender)
+    public InteractionState(string objId, MouseButton button, MouseState mouseAction, MoveMouse sender)
     {
         ObjId = objId;
-        Ctx = ctx;
+        MouseAction = mouseAction;
         Button = button;
         MousePos = sender.transform.position;
         Sender = sender;
     }
 }
 
-public enum MouseButton{
+public enum MouseButton
+{
     MouseLeft,
     MouseRight,
     MouseMiddle,
     MouseMovement
+}
+
+// Test both L & R at the same time
+
+public enum MouseState
+{
+    MouseDown,
+    MouseUp,
+    Held,
+    None
 }

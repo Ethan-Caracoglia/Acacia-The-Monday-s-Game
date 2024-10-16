@@ -16,9 +16,10 @@ public abstract class abTool : MoveableObject
 
     }
 
+
     public override void TryMouseInput(InteractionState state)
     {
-        if (state.Button == MouseButton.MouseLeft && state.Ctx.performed)
+        if (state.Button == MouseButton.MouseLeft && state.MouseAction == MouseState.MouseDown)
         {
             if (PickUpObject(state.MousePos, state.Sender))
             {
@@ -27,7 +28,7 @@ public abstract class abTool : MoveableObject
         }
 
 
-        if (state.Button == MouseButton.MouseRight && state.Ctx.canceled)
+        if (state.Button == MouseButton.MouseRight && state.MouseAction == MouseState.MouseUp)
         {
             // Check this, make sure it doesn't re-enable
             objCollider.enabled = true;

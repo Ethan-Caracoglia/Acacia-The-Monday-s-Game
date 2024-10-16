@@ -12,7 +12,7 @@ public class MoveMouse : MonoBehaviour
     float width;
 
     private static CollisionSorter collisionSorter = new CollisionSorter();
-
+    // TODO: Store current mouse state
 
     private MoveableObject? currentHeldObj;
     private string heldObjId
@@ -41,6 +41,11 @@ public class MoveMouse : MonoBehaviour
         width = height * cam.aspect;
     }
 
+    private void Update()
+    {
+        
+    }
+
     public void UpdateMouse(InputAction.CallbackContext ctx)
     {
         Vector2 mousePos = ctx.ReadValue<Vector2>();
@@ -49,37 +54,53 @@ public class MoveMouse : MonoBehaviour
         if (holdingObj)
         {
             currentHeldObj.UpdateMousePosition(transform.position);
+            // How update about held down
+            IInteractable topObj = GetTopCollision();
+            if (topObj != null)
+            {
+                //TODO : Figure out the CURRENT MOUSE STATE
+                InteractionState state = new InteractionState(heldObjId,  MouseButton.MouseMovement, MouseState.Held, this);
+                topObj.TryMouseInput(state);
+            }
         }
     }
 
-    public void GetMouseDown(InputAction.CallbackContext ctx)
+    // Finds the top Z object to interact with, and ignores all others.
+    private IInteractable GetTopCollision()
     {
-        if (holdingObj)
-        {
-            currentHeldObj.HeldUse(MouseButton.MouseLeft, ctx.performed);
-        }
-
-        // Finds the top Z object to interact with, and ignores all others.
         Collider2D[] results = new Collider2D[8];
         Physics2D.OverlapPoint(transform.position, c.NoFilter(), results);
         List<Collider2D> resultList = new List<Collider2D>(results);
-        Debug.Log(resultList.Count);
         resultList.Sort(collisionSorter);
-
         foreach (Collider2D col in resultList)
         {
             if (col == null) continue;
 
             IInteractable obj = col.gameObject.GetComponent<IInteractable>();
             if (obj == null) continue;
+            return obj;
+        }
+        return null;
+    }
 
-            Console.Write("Object Found");
-            InteractionState state = new InteractionState(heldObjId, ctx, MouseButton.MouseLeft, this);
-            obj.TryMouseInput(state);
+    // TDOO: Rewrite to be clearer, 
+    public void GetMouseDown(InputAction.CallbackContext ctx)
+    {
+        if (holdingObj)
+        {
+            currentHeldObj.HeldUse(MouseButton.MouseLeft, ctx.performed);
+        }
+        IInteractable topObj = GetTopCollision();
+        if (topObj != null)
+        {
+            // Change MouseState to up / down
+            InteractionState state = new InteractionState(heldObjId, MouseButton.MouseLeft, MouseState.MouseDown, this);
+            topObj.TryMouseInput(state);
         }
     }
 
-
+    // Methods callable by the held objects
+    #region HeldObjectCallbacks
     public bool TrySetCurrentHeldObj(MoveableObject obj)
     {
         if (holdingObj) return false;
@@ -95,4 +116,5 @@ public class MoveMouse : MonoBehaviour
         currentHeldObj = null;
     }
 
+    #endregion
 }
