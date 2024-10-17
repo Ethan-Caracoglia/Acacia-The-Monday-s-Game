@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class BasicWin : MonoBehaviour
 {
-    bool won = false;
-    [SerializeField] MoveableObject[] parts;
-    int iceCount = 1;
+    public bool won = false;
+    [SerializeField] public MoveableObject[] parts;
+    public int iceCount = 1;
     [SerializeField] SpriteRenderer victory;
     // Start is called before the first frame update
     void Start()
