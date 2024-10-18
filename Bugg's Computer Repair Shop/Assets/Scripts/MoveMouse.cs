@@ -126,6 +126,6 @@ public class MoveMouse : MonoBehaviour
 
     public void QuitGame(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed) AppSprinlication.Quit();
+        if (ctx.performed) Application.Quit();
     }
 }
