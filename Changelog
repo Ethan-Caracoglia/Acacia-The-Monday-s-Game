@@ -1,0 +1,8 @@
+Refactored single "Moveable Object" class into like, a lot of interfaces
+-IInteractable: Defines an object as interactable with the mouse, determines how to handle any given input from the mouse
+-MoveMouse: Sends interaction states to the top Z most IInteractable in the scene (allows us to have multiple interactable objects stacked on eachother
+-CollisionSorter: Implements ICompararer<2DCollider> to sort collisions in the game
+-Interaction State: Contains data used for Interacted with objects
+-Immovable Object: Cannot be Moved, eats interaction inputs.
+-Moveable Object: Can be moved, useful class for any object that would want to be moved.
+-abTool: abstract tool class. pick up and put down with left mouse, use with right click. (currently unused)
