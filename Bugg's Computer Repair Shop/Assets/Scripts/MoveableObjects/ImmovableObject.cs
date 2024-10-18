@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ImmovableObject : ObjInterface
 {
-
     public override void ParentPositionChange(Vector3 newPos)
     {
         UpdatePosition(newPos);
@@ -19,19 +18,4 @@ public class ImmovableObject : ObjInterface
     {
         return;
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-
-
 }

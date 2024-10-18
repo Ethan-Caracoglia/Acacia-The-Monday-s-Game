@@ -2,21 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/** An abstract class for every tool  */
 public abstract class abTool : MoveableObject
 {
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-
     public override void TryMouseInput(InteractionState state)
     {
         if (state.Button == MouseButton.MouseLeft && state.MouseAction == MouseState.MouseDown)

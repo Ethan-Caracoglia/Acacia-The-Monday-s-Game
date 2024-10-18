@@ -6,22 +6,20 @@ using UnityEngine;
 // Split into "snapping and non-snapping objects: would be nice to move objects on top of others. Not neccessary though.
 public class MoveableObject : ObjInterface
 {
+    // Public Fields
     public Sprite sprite;
     public Sprite highlightSprite;
-
-    protected bool dragging = false;
     public MoveMouse Holder;
-
     public bool snapped = true;
+    public ObjInterface[] coveredObjs;
 
+    // Protected Fields
+    protected bool dragging = false;
     protected Vector3 offset;
     protected Vector3 snapPosition;
-
-    public ObjInterface[] coveredObjs;
+    protected Collider2D objCollider;
     [SerializeField] protected float snapDistance = 0.01f;
 
-
-    protected Collider2D objCollider;
     // Start is called before the first frame update
     void Start()
     {
@@ -50,6 +48,7 @@ public class MoveableObject : ObjInterface
 
 
     // Might need to be changed
+    // Ethan: Don't change this for now since it just works 
     void OnMouseOver()
     {
         transform.GetComponent<SpriteRenderer>().sprite = highlightSprite;
@@ -118,8 +117,9 @@ public class MoveableObject : ObjInterface
     /// <summary>
     /// Sets down an object
     /// </summary>
-    protected void SetDownObject()
+    public void SetDownObject()
     {
+        Debug.Log("Drop Obj");
         if (dragging == false)
             return;
 
@@ -151,9 +151,9 @@ public class MoveableObject : ObjInterface
     /// When held, accepts mouse input. Override when needed.
     /// </summary>
     /// <param name="button">Button Pressed</param>
-    public virtual void HeldUse(MouseButton button, bool down)
+    public virtual void HeldUse(MouseButton button, bool drag)
     {
-        if(!down)
+        if(drag)
             SetDownObject();
     }
 

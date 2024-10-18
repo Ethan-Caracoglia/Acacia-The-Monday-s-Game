@@ -15,6 +15,7 @@ public class MoveMouse : MonoBehaviour
     // TODO: Store current mouse state
 
     private MoveableObject? currentHeldObj;
+
     private string heldObjId
     {
         get
@@ -24,6 +25,7 @@ public class MoveMouse : MonoBehaviour
             return currentHeldObj.id;
         }
     }
+
     private bool holdingObj
     {
         get
@@ -31,7 +33,6 @@ public class MoveMouse : MonoBehaviour
             return currentHeldObj != null;
         }
     }
-
 
     private ContactFilter2D c = new ContactFilter2D();
     private void Start()
@@ -96,6 +97,11 @@ public class MoveMouse : MonoBehaviour
             // Change MouseState to up / down
             InteractionState state = new InteractionState(heldObjId, MouseButton.MouseLeft, MouseState.MouseDown, this);
             topObj.TryMouseInput(state);
+        }
+
+        if (ctx.canceled && currentHeldObj != null)
+        {
+            currentHeldObj.SetDownObject();
         }
     }
 

@@ -22,7 +22,7 @@ public class Dialogue : MonoBehaviour
         if (lines.Length > 0)
         {
             StartDialogue();
-        }
+        } 
         else
         {
             Debug.LogWarning("No dialogue lines assigned.");
