@@ -44,7 +44,7 @@ public class MoveMouse : MonoBehaviour
 
     private void Update()
     {
-        
+
     }
 
     public void UpdateMouse(InputAction.CallbackContext ctx)
@@ -60,7 +60,7 @@ public class MoveMouse : MonoBehaviour
             if (topObj != null)
             {
                 //TODO : Figure out the CURRENT MOUSE STATE
-                InteractionState state = new InteractionState(heldObjId,  MouseButton.MouseMovement, MouseState.Held, this);
+                InteractionState state = new InteractionState(heldObjId, MouseButton.MouseMovement, MouseState.Held, this);
                 topObj.TryMouseInput(state);
             }
         }
@@ -123,4 +123,9 @@ public class MoveMouse : MonoBehaviour
     }
 
     #endregion
+
+    public void QuitGame(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed) AppSprinlication.Quit();
+    }
 }

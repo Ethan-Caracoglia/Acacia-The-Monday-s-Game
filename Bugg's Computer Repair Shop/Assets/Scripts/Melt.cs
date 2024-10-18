@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 public class Melt : MonoBehaviour
 {
@@ -12,8 +13,9 @@ public class Melt : MonoBehaviour
     public SpriteRenderer spr;
 
     [SerializeField] float meltRate = 0.4f;
-
     [SerializeField] float minSize = 0.3f;
+    [SerializeField] Sprite lighterOff;
+    [SerializeField] Sprite lighterOn;
 
     [SerializeField] BasicWin b;
     // Start is called before the first frame update
@@ -37,13 +39,13 @@ public class Melt : MonoBehaviour
         if (ctx.performed)
         {
             isMouseDown = true;
-            spr.color = Color.red;
+            spr.sprite = lighterOn;
 
 }
         if (ctx.canceled)
         {
             isMouseDown = false;
-            spr.color = Color.white;
+            spr.sprite = lighterOff;
         }
     }
 
