@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MousePosState : MonoBehaviour
+public struct MousePosState
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    #region Fields
+    public Vector2 pos;
+    #endregion
 
-    // Update is called once per frame
-    void Update()
+    #region Methods
+    public MousePosState(Vector2 pos)
     {
-        
+        this.pos = pos; 
     }
+    #endregion
 }
