@@ -7,11 +7,11 @@ using UnityEngine;
 public class MoveableObject : ObjInterface
 {
     // Public Fields
+    [SerializeField] protected SpriteRenderer objSprite;
     public Sprite sprite;
     public Sprite highlightSprite;
     public MoveMouse Holder;
     public bool snapped = true;
-    public ObjInterface[] coveredObjs;
 
     // Protected Fields
     protected bool dragging = false;
@@ -30,10 +30,6 @@ public class MoveableObject : ObjInterface
         {
             offsets.Add(mObj.id, mObj.transform.position - transform.position);
         }
-        foreach (var mObj in coveredObjs)
-        {
-            mObj.covered = true;
-        }
     }
 
     // Update is called once per frame
@@ -51,12 +47,12 @@ public class MoveableObject : ObjInterface
     // Ethan: Don't change this for now since it just works 
     void OnMouseOver()
     {
-        transform.GetComponent<SpriteRenderer>().sprite = highlightSprite;
+        objSprite.sprite = highlightSprite;
     }
 
     void OnMouseExit()
     {
-        transform.GetComponent<SpriteRenderer>().sprite = sprite;
+        objSprite.sprite = sprite;
     }
 
     public override void ParentPositionChange(Vector3 newPos)
@@ -101,7 +97,6 @@ public class MoveableObject : ObjInterface
     /// <param name="m">PickUpObject</param>
     protected bool PickUpObject(Vector3 v, MoveMouse sender)
     {
-        if (covered) return false;
 
         if (!sender.TrySetCurrentHeldObj(this)) return false;
 
@@ -132,18 +127,8 @@ public class MoveableObject : ObjInterface
         {
             UpdatePosition(snapPosition);
             snapped = true;
-            foreach (var mObj in coveredObjs)
-            {
-                mObj.covered = true;
-            }
         }
-        else
-        {
-            foreach (var mObj in coveredObjs)
-            {
-                mObj.covered = false;
-            }
-        }
+       
     }
 
 

@@ -7,7 +7,6 @@ public abstract class ObjInterface : MonoBehaviour, IInteractable
 {
     public const string EMPTY_OBJ_ID = "EMPTY";
     public string id;
-    public bool covered = false;
     public ObjInterface[] childrenObjs;
     protected Dictionary<string, Vector3> offsets = new Dictionary<string, Vector3>();
 
