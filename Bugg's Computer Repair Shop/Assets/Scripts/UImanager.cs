@@ -12,6 +12,28 @@ public class UImanager : MonoBehaviour
     bool iceMelted = false;
     bool partsReassembled = false;
 
+    public bool CaseRemoved
+    {
+        get
+        {
+            return caseRemoved;
+        }
+    }
+    public bool IceMelted
+    {
+        get
+        {
+            return iceMelted;
+        }
+    }
+    public bool PartsReassembled
+    {
+        get
+        {
+            return partsReassembled;
+        }
+    }
+
     //track which step you're on
     int objectiveNum = 0;
 
