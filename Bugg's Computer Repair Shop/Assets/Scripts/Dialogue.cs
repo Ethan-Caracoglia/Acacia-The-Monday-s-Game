@@ -93,6 +93,6 @@ public class Dialogue : MonoBehaviour
     {
         dialogueEnded = true;
         Debug.Log("Dialogue ended.");
-        SceneManager.LoadScene(1);  // Load the next scene
+        SceneManager.LoadScene(2);  // Load the next scene
     }
 }
