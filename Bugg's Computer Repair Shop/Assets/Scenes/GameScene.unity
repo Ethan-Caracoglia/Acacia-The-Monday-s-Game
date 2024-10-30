@@ -1632,8 +1632,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1995033106}
-  - component: {fileID: 1995033107}
   - component: {fileID: 1995033108}
+  - component: {fileID: 1995033109}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1657,19 +1657,6 @@ Transform:
   - {fileID: 1887212128}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1995033107
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1995033105}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d16d3cead0bdce24b94d2b14c7003f62, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam: {fileID: 1922534808}
 --- !u!114 &1995033108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1697,13 +1684,13 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1995033107}
-        m_TargetAssemblyTypeName: MoveMouse, Assembly-CSharp
-        m_MethodName: GetMouseDown
-        m_Mode: 0
+      - m_Target: {fileID: 1995033109}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1712,30 +1699,18 @@ MonoBehaviour:
     m_ActionId: 5426fde7-9e2a-4d76-9f3f-a6a933a83645
     m_ActionName: Main/Primary Action[/Mouse/leftButton]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1143129983}
-        m_TargetAssemblyTypeName: Melt, Assembly-CSharp
-        m_MethodName: GetMouseDown
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: fd1d9b8a-0fa7-40e9-9424-a0d9ebbfeeec
     m_ActionName: Main/Secondary Action[/Mouse/rightButton]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1995033107}
-        m_TargetAssemblyTypeName: MoveMouse, Assembly-CSharp
-        m_MethodName: UpdateMouse
-        m_Mode: 0
+      - m_Target: {fileID: 1995033109}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1745,7 +1720,7 @@ MonoBehaviour:
     m_ActionName: Main/Move[/Mouse/position]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1995033107}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MoveMouse, Assembly-CSharp
         m_MethodName: QuitGame
         m_Mode: 0
@@ -1764,6 +1739,18 @@ MonoBehaviour:
   m_DefaultActionMap: Main
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &1995033109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995033105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca1a352e514d1f44db74b7bedb552efe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2066335436
 GameObject:
   m_ObjectHideFlags: 0
