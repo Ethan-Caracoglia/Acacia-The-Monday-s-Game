@@ -23,7 +23,7 @@ public abstract class ObjInterface : MonoBehaviour, IInteractable
     }
 
 
-    protected overred
+    public abstract GetInput() 
 
 
     public abstract void ParentPositionChange(Vector3 newPos);
