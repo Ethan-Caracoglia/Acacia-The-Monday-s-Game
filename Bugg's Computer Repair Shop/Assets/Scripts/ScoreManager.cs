@@ -9,14 +9,17 @@ public class ScoreManager : MonoBehaviour
     UImanager objectives;
 
     // Score for each objective
+    /*
     [SerializeField]
     int caseRemovedScore = -1;
     [SerializeField]
     int iceMeltedScore = -1;
     [SerializeField]
     int partsReassembledScore = -1;
+    */
     [SerializeField]
     int totalScore = 0;
+    int calculateTotalScore = 0;
     int totalPossibleScore = 0;
 
     [SerializeField]
@@ -24,10 +27,12 @@ public class ScoreManager : MonoBehaviour
     [SerializeField]
     List<bool> objectivesProgress;
     [SerializeField]
+    List<int> objectivesDelay;
+    [SerializeField]
     int objectivesAmount;
 
 
-
+    /*
     public int CaseRemovedScore
     {
         get
@@ -49,6 +54,7 @@ public class ScoreManager : MonoBehaviour
             return caseRemovedScore;
         }
     }
+    */
 
     // Keeps track of time taken for an objectove
     [SerializeField]
@@ -62,20 +68,13 @@ public class ScoreManager : MonoBehaviour
     [SerializeField]
     bool objectivesDone;
 
-    // Delay to increase time conversion for score
-    int caseRemovedDelay;
-    int iceMeltedDelay;
-    int partsReassembledDelay;
-
     [SerializeField]
     private TextMeshProUGUI scoreDisplay;
 
     // Start is called before the first frame update
     void Start()
     {
-        caseRemovedDelay = 1;
-        iceMeltedDelay = 4;
-        partsReassembledDelay = 1;
+        // Sets list to default data
         objectivesScore = new List<int>(objectivesAmount);
         for (int i = 0; i < objectivesAmount; i++)
         {
@@ -85,14 +84,22 @@ public class ScoreManager : MonoBehaviour
         {
             objectivesScore.Add(-1);
         }
+        for (int i = 0; i < objectivesAmount; i++)
+        {
+            objectivesDelay.Add(1);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Hard coded for ice minigame
         objectivesProgress[0] = objectives.CaseRemoved;
         objectivesProgress[1] = objectives.IceMelted;
+        objectivesDelay[1] = 4;
         objectivesProgress[2] = objectives.PartsReassembled;
+        
+        // Old Code
         /*
         if (currentObjective == 0)
         {
@@ -132,12 +139,16 @@ public class ScoreManager : MonoBehaviour
             }
         }
         */
+        
+        // Runs for each objective
         if (currentObjective < objectivesAmount)
         {
+            // Controls score update for current objective
             if (objectivesScore[currentObjective] == -1)
             {
-                objectivesScore[currentObjective] = ScoreTimer(objectivesProgress[2], 1);
+                objectivesScore[currentObjective] = ScoreTimer(objectivesProgress[currentObjective], objectivesDelay[currentObjective]);
             }
+            // Resets for next objective
             else
             {
                 timer = 0;
@@ -149,10 +160,15 @@ public class ScoreManager : MonoBehaviour
             objectivesDone = true;
         }
 
-
+        // Calculates and displays the total score
         if (objectivesDone == true)
         {
-            totalScore = caseRemovedScore + iceMeltedScore + partsReassembledScore;
+            if (calculateTotalScore < objectivesAmount)
+            {
+                totalScore = totalScore + objectivesScore[calculateTotalScore];
+                calculateTotalScore++;
+            }
+
             totalPossibleScore = 5 * objectivesAmount;
             scoreDisplay.text = $"Total Score = {totalScore}/{totalPossibleScore}";
         }
@@ -163,13 +179,16 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
+    // Calculates the score for an objective
     public int ScoreTimer(bool objectiveDone, int timeDelay)
     {
         int score = -1;
+        // While an objective is not done, increases the timer
         if (objectiveDone == false)
         {
             timer = timer + Time.deltaTime;
         }
+        // When an objectvie is done, converts time to score
         if (objectiveDone == true)
         {
             if (timer <= (2*timeDelay))
