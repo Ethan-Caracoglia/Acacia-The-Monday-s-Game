@@ -2,25 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-// Split into "snapping and non-snapping objects: would be nice to move objects on top of others. Not neccessary though.
+/// <summary>
+/// Split into "snapping and non-snapping objects: would be nice to move objects on top of others. Not neccessary though.
+/// </summary>
 public class MoveableObject : ObjInterface
 {
-    // Public Fields
-    public Sprite sprite;
+    #region Fields
+    #region Public Fields
+    public Sprite sprite; // Base sprite 
     public Sprite highlightSprite;
-    public MoveMouse Holder;
+    public PlayerState player;
     public bool snapped = true;
     public ObjInterface[] coveredObjs;
+    #endregion
 
-    // Protected Fields
+    #region Protected Fields
+    [SerializeField] protected float snapDistance = 0.01f;
     protected bool dragging = false;
     protected Vector3 offset;
     protected Vector3 snapPosition;
     protected Collider2D objCollider;
-    [SerializeField] protected float snapDistance = 0.01f;
+    #endregion
+    #endregion
 
-    // Start is called before the first frame update
+    #region Internal Methods
+    /// <summary>
+    /// Setup the 
+    /// </summary>
     void Start()
     {
         objCollider = GetComponent<Collider2D>();
@@ -46,7 +54,6 @@ public class MoveableObject : ObjInterface
         }
     }
 
-
     // Might need to be changed
     // Ethan: Don't change this for now since it just works 
     void OnMouseOver()
@@ -58,7 +65,9 @@ public class MoveableObject : ObjInterface
     {
         transform.GetComponent<SpriteRenderer>().sprite = sprite;
     }
+    #endregion
 
+    #region External Methods
     public override void ParentPositionChange(Vector3 newPos)
     {
         snapPosition = newPos;
@@ -73,7 +82,7 @@ public class MoveableObject : ObjInterface
         UpdatePosition(MousePos + offset);
     }
 
-    public override void TryMouseInput(InteractionState state)
+    public override void TryMouseInput(MState state)
     {
         MoveObj(state);
     }
@@ -82,15 +91,11 @@ public class MoveableObject : ObjInterface
     /// Responsible for the default movement of moveable Objects
     /// </summary>
     /// <param name="state">Mouse Input State</param>
-    private void MoveObj(InteractionState state)
+    private void MoveObj(MState state)
     {
-        if (state.Button == MouseButton.MouseLeft && state.ObjId == EMPTY_OBJ_ID)
+        if (state.GetMBPressed(0) && state.GetHeldObject().id == EMPTY_OBJ_ID)
         {
-            // Pick up Object
-            if (state.MouseAction == MouseState.MouseDown)
-            {
-                PickUpObject(state.MousePos, state.Sender);
-            }
+            PickUpObject(state);
         }
     }
 
@@ -99,11 +104,17 @@ public class MoveableObject : ObjInterface
     /// </summary>
     /// <param name="v">PickUpObject</param>
     /// <param name="m">PickUpObject</param>
-    protected bool PickUpObject(Vector3 v, MoveMouse sender)
+    protected bool PickUpObject(MState state)
     {
-        if (covered) return false;
+        if (covered)
+        {
+            return false;
+        }
 
-        if (!sender.TrySetCurrentHeldObj(this)) return false;
+        if (!sender.TrySetCurrentHeldObj(this))
+        {
+            return false;
+        }
 
         // Disable collider when picked up so the click propegates properly
         objCollider.enabled = false;
@@ -122,7 +133,6 @@ public class MoveableObject : ObjInterface
         Debug.Log("Drop Obj");
         if (dragging == false)
             return;
-
 
         objCollider.enabled = true;
         Holder.SetDownObj();
@@ -157,5 +167,9 @@ public class MoveableObject : ObjInterface
             SetDownObject();
     }
 
+    #region Getters
+    #endregion
 
+    #region Setters
+    #endregion
 }

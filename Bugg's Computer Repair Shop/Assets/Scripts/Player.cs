@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -12,14 +14,9 @@ public class Player : MonoBehaviour
     #endregion
 
     #region Fields
-    #region Static Fields
-    // Do we even need this to be static if we only have one player?
-    private static CollisionSorter collisionSorter = new CollisionSorter();
-    #endregion
-
-    #region Non-Static Fields
     [SerializeField] private Camera mainCamera;
-    private MState mouseState;
+    private CollisionSorter collisionSorter = new CollisionSorter();
+    private PlayerState player;
     private bool[] MBPressed;
     private bool[] MBReleased;
     private Vector2 mousePos;
@@ -27,35 +24,9 @@ public class Player : MonoBehaviour
     // This makes a compiler warning go away because we are allowing this variable to accept a
     // value of null with the '?'
     #nullable enable
-    private MoveableObject? currentHeldObj;
+    private MoveableObject? heldObj;
     #nullable disable
     // ^^^ Don't worry about this
-    #endregion
-    #endregion
-
-    #region Properties
-    // Returns the id of the held object
-    private string heldObjId
-    {
-        get
-        {
-            if (currentHeldObj == null)
-            {
-                return MoveableObject.EMPTY_OBJ_ID;
-            }
-
-            return currentHeldObj.id;
-        }
-    }
-
-    // Checks whether the player is holding an object or not
-    private bool holdingObj
-    {
-        get
-        {
-            return currentHeldObj != null;
-        }
-    }
     #endregion
 
     #region Internal Methods
@@ -94,13 +65,6 @@ public class Player : MonoBehaviour
     #endregion
 
     #region External Methods
-    // To be called on every update so that the reciever is getting up to date information
-    public MState GetMouseState()
-    {
-        mouseState = new MState(MBPressed, MBReleased, mousePos);
-        return mouseState;
-    }
-
     public void OnMouseMove(InputAction.CallbackContext ctx)
     {
         // Get the screen coordinate
@@ -118,12 +82,11 @@ public class Player : MonoBehaviour
             IInteractable topObj = GetTopCollision();
             if (topObj != null)
             {
-                //topObj.TryMouseInput(mouseState);
+                topObj.TryMouseInput(mouseState);
             }
         }
     }
 
-    // TDOO: Rewrite to be clearer, 
     public void OnMousePrimary(InputAction.CallbackContext ctx)
     {
         // Adjust all of the buttons accordingly
@@ -146,14 +109,13 @@ public class Player : MonoBehaviour
         // Use the object being held
         if (holdingObj)
         {
-            currentHeldObj.HeldUse(MouseButton.MouseLeft, ctx.performed);
+            currentHeldObj.HeldUse(mouseState);
         }
         IInteractable topObj = GetTopCollision();
         if (topObj != null)
         {
             // Change MouseState to up / down
-            InteractionState state = new InteractionState(heldObjId, MouseButton.MouseLeft, MouseState.MouseDown, this);
-            topObj.TryMouseInput(state);
+            topObj.TryMouseInput(mouseState);
         }
 
         if (ctx.canceled && currentHeldObj != null)
@@ -198,12 +160,53 @@ public class Player : MonoBehaviour
     {
         currentHeldObj = null;
     }
-
     #endregion
 
+    #region Getters
+    public PlayerState GetPlayerState()
+    {
+        return player;
+    }
+
+    public MoveableObject GetMoveableObj()
+    {
+        return heldObj;
+    }
+
+    public bool IsHoldingObj()
+    {
+        if (heldObj == null)
+        {
+            return false;
+        }
+
+        return true;
+    }
+    #endregion
+
+    #region Setters
+    public PlayerState SetPlayerState()
+    {
+        return new PlayerState(MBPressed, MBReleased, mousePos, heldObj);
+    }
+    #endregion
+
+    // Quits game on button press
     public void QuitGame(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed) Application.Quit();
+        if (ctx.performed)
+        {
+            Application.Quit();
+        }
+    }
+
+    // Reloads scene on button press
+    public void RestartGame(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
     #endregion
 }
