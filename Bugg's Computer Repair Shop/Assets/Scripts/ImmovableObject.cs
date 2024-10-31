@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ImmovableObject : ObjInterface
+public class ImmovableObj : ObjInterface
 {
     public override void ParentPositionChange(Vector3 newPos)
     {

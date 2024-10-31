@@ -11,10 +11,11 @@ public abstract class ObjInterface : MonoBehaviour, IInteractable
     public ObjInterface[] childrenObjs;
     protected Dictionary<string, Vector3> offsets = new Dictionary<string, Vector3>();
 
-    /// <summary>
-    /// CALL THIS INSTEAD OF SETTING THE POSITION.
-    /// </summary>
-    /// <param name="newPos"></param>
+    protected void Move(Vector3 mousePos)
+    {
+
+    }
+
     public void UpdatePosition(Vector3 newPos)
     {
         // Potentially make this move to top Z value and drop down?
@@ -28,7 +29,7 @@ public abstract class ObjInterface : MonoBehaviour, IInteractable
 
     public abstract void ParentPositionChange(Vector3 newPos);
 
-    public abstract void TryMouseInput(InteractionState state);
+    public abstract void TryMouseInput(PlayerState player);
 
-    public abstract void UpdateMousePosition(Vector3 MousePos);
+    public abstract void UpdatePosition(Vector3 mousePos);
 }

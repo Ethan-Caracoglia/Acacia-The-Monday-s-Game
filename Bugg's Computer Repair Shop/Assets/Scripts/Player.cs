@@ -8,51 +8,45 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    // Stores conversion ratios for pixels to Unity units
-    #region Constants
-    private const int PIXELS_TO_UNITY_UNITY_UNITS_RATIO = 100;
-    #endregion
-
+    #nullable enable
     #region Fields
-    [SerializeField] private Camera mainCamera;
-    private CollisionSorter collisionSorter = new CollisionSorter();
+    #region private
+    private Camera mainCamera;
+    private CollisionSorter collisionSorter;
+    private MoveableObj? heldObj;
     private PlayerState player;
+    private Vector2 mousePos;
+    private ContactFilter2D contactFilter;
     private bool[] MBPressed;
     private bool[] MBReleased;
-    private Vector2 mousePos;
-    private ContactFilter2D contactFilter = new ContactFilter2D();
-    // This makes a compiler warning go away because we are allowing this variable to accept a
-    // value of null with the '?'
-    #nullable enable
-    private MoveableObject? heldObj;
-    #nullable disable
-    // ^^^ Don't worry about this
+    #endregion
     #endregion
 
-    #region Internal Methods
+    #region Methods
+    #region private
     private void Start()
     {
-        // Lock the mouse to the inside of the window
         Cursor.lockState = CursorLockMode.Confined;
-        // Hide the cursor
         Cursor.visible = false;
-        //Setup each array to allow for the correct number of buttons
+
+        mainCamera = Camera.main;
+        collisionSorter = new CollisionSorter();
+        heldObj = null;
+        mousePos = Vector2.zero;
+        contactFilter = new ContactFilter2D();
         MBPressed = new bool[2];
         MBReleased = new bool[2];
-        // Zero the vector to start out
-        mousePos = Vector2.zero;
-        // Set the current state of the mouse
-        mouseState = new MState();  
+
+        player = new PlayerState(MBPressed, MBReleased, mousePos, heldObj);  
     }
 
     // Finds the top Z object to interact with, and ignores all others.
-    private IInteractable GetTopCollision()
+    private IInteractable? GetTopCollision()
     {
-        Collider2D[] results = new Collider2D[8];
+        List<Collider2D> results = new List<Collider2D>();
         Physics2D.OverlapPoint(transform.position, contactFilter.NoFilter(), results);
-        List<Collider2D> resultList = new List<Collider2D>(results);
-        resultList.Sort(collisionSorter);
-        foreach (Collider2D col in resultList)
+        results.Sort(collisionSorter);
+        foreach (Collider2D col in results)
         {
             if (col == null) continue;
 
@@ -62,22 +56,54 @@ public class Player : MonoBehaviour
         }
         return null;
     }
+
+    private
+
+    private bool IsHoldingObj()
+    {
+        if (heldObj == null)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    private PlayerState SetPlayerState()
+    {
+        return new PlayerState(MBPressed, MBReleased, mousePos, heldObj);
+    }
+
+    // Methods callable by the held objects
+    private bool GrabObj(MoveableObj obj)
+    {
+        if (IsHoldingObj())
+        {
+            return false;
+        }
+
+        heldObj = obj;
+        obj.Holder = this;
+        return true;
+    }
+
+    // Probably not the optimal way to do this
+    private void DropObj()
+    {
+        heldObj = null;
+    }
     #endregion
 
-    #region External Methods
+    #region public
     public void OnMouseMove(InputAction.CallbackContext ctx)
     {
-        // Get the screen coordinate
-        mousePos = ctx.ReadValue<Vector2>();
-        // Convert it to world coordinate
-        mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-        // Set the position of the player to that
+        mousePos = Camera.main.ScreenToWorldPoint(ctx.ReadValue<Vector2>());
         transform.position = mousePos;
 
         // Update the location of a held object
-        if (holdingObj)
+        if (IsHoldingObj())
         {
-            currentHeldObj.UpdateMousePosition(mousePos);
+            GetHeldObj.UpdateMousePosition(mousePos);
             // How update about held down
             IInteractable topObj = GetTopCollision();
             if (topObj != null)
@@ -107,10 +133,15 @@ public class Player : MonoBehaviour
         }
 
         // Use the object being held
-        if (holdingObj)
+        if (IsHoldingObj())
         {
-            currentHeldObj.HeldUse(mouseState);
+            heldObj.HeldUse(player);
         }
+        else if (ctx.performed) 
+        {
+            IInteractable topObj = GetTopCollision();
+        }
+
         IInteractable topObj = GetTopCollision();
         if (topObj != null)
         {
@@ -144,54 +175,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    // Methods callable by the held objects
-    #region HeldObjectCallbacks
-    public bool TrySetCurrentHeldObj(MoveableObject obj)
-    {
-        if (holdingObj) return false;
-
-        currentHeldObj = obj;
-        obj.Holder = this;
-        return true;
-    }
-
-    // Probably not the optimal way to do this
-    public void SetDownObj()
-    {
-        currentHeldObj = null;
-    }
-    #endregion
-
-    #region Getters
-    public PlayerState GetPlayerState()
-    {
-        return player;
-    }
-
-    public MoveableObject GetMoveableObj()
-    {
-        return heldObj;
-    }
-
-    public bool IsHoldingObj()
-    {
-        if (heldObj == null)
-        {
-            return false;
-        }
-
-        return true;
-    }
-    #endregion
-
-    #region Setters
-    public PlayerState SetPlayerState()
-    {
-        return new PlayerState(MBPressed, MBReleased, mousePos, heldObj);
-    }
-    #endregion
-
-    // Quits game on button press
     public void QuitGame(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
@@ -200,7 +183,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    // Reloads scene on button press
     public void RestartGame(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
@@ -208,5 +190,6 @@ public class Player : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
+    #endregion
     #endregion
 }

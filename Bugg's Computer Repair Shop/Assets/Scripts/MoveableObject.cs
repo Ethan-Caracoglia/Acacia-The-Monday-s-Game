@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Split into "snapping and non-snapping objects: would be nice to move objects on top of others. Not neccessary though.
 /// </summary>
-public class MoveableObject : ObjInterface
+public class MoveableObj : ObjInterface
 {
     #region Fields
     #region Public Fields
@@ -82,20 +82,20 @@ public class MoveableObject : ObjInterface
         UpdatePosition(MousePos + offset);
     }
 
-    public override void TryMouseInput(MState state)
+    public override void TryMouseInput(PlayerState player)
     {
-        MoveObj(state);
+        MoveObj(player);
     }
 
     /// <summary>
     /// Responsible for the default movement of moveable Objects
     /// </summary>
     /// <param name="state">Mouse Input State</param>
-    private void MoveObj(MState state)
+    private void MoveObj(PlayerState player)
     {
-        if (state.GetMBPressed(0) && state.GetHeldObject().id == EMPTY_OBJ_ID)
+        if (player.GetMBPressed(0) && player.GetHeldObj().id == EMPTY_OBJ_ID)
         {
-            PickUpObject(state);
+            PickUpObj(player);
         }
     }
 
@@ -104,7 +104,7 @@ public class MoveableObject : ObjInterface
     /// </summary>
     /// <param name="v">PickUpObject</param>
     /// <param name="m">PickUpObject</param>
-    protected bool PickUpObject(MState state)
+    protected bool PickUpObj(PlayerState player)
     {
         if (covered)
         {
@@ -161,7 +161,7 @@ public class MoveableObject : ObjInterface
     /// When held, accepts mouse input. Override when needed.
     /// </summary>
     /// <param name="button">Button Pressed</param>
-    public virtual void HeldUse(MouseButton button, bool drag)
+    public virtual void HeldUse(PlayerState player)
     {
         if(drag)
             SetDownObject();

@@ -12,6 +12,7 @@ using UnityEngine;
 /// </summary>
 public struct PlayerState
 {
+    #nullable enable
     #region Constants
     // Number of buttons that are used from the mouse
     private const int NUM_OF_BUTTONS = 2;
@@ -23,23 +24,11 @@ public struct PlayerState
     private bool[] MBReleased; // MBReleased[i] == true on and after the frame it is released
     private bool[] MBHeld; // MBHeld[i] == true until MBReleased[i] == true
     private Vector2 mousePos; // The world position of the mouse
-    #nullable enable
-    private MoveableObject? heldObj; // The object (if any) that is being held
-    #nullable disable
-    #endregion
-
-    #region Properties
-    public int NumButtons
-    {
-        get
-        {
-            return NUM_OF_BUTTONS;
-        }
-    }
+    private MoveableObj? heldObj; // The object (if any) that is being held
     #endregion
 
     #region Internal Methods
-    public PlayerState(bool[] MBPressed, bool[] MBReleased, Vector2 mousePos, MoveableObject heldObj)
+    public PlayerState(bool[] MBPressed, bool[] MBReleased, Vector2 mousePos, MoveableObj? heldObj)
     {
         this.MBPressed = MBPressed;
         this.MBReleased = MBReleased;
@@ -56,17 +45,22 @@ public struct PlayerState
     #endregion
 
     #region External Methods
-    public bool GetMBPressed(uint button)
+    public int GetNumButtons()
+    {
+        return NUM_OF_BUTTONS;
+    }
+
+    public bool GetMBPressed(int button)
     {
         return MBPressed[button];
     }
 
-    public bool GetMBReleased(uint button)
+    public bool GetMBReleased(int button)
     {
         return MBReleased[button];
     }
 
-    public bool GetMBHeld(uint button)
+    public bool GetMBHeld(int button)
     {
         return MBHeld[button];
     }
@@ -77,7 +71,7 @@ public struct PlayerState
         return position;
     }
 
-    public MoveableObject GetHeldObj()
+    public MoveableObj? GetHeldObj()
     {
         return this.heldObj;
     }

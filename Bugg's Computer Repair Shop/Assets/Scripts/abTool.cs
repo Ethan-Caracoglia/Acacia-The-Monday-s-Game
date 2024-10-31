@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /** An abstract class for every tool  */
-public abstract class abTool : MoveableObject
+public abstract class abTool : MoveableObj
 {
     public override void TryMouseInput(InteractionState state)
     {
