@@ -47,36 +47,21 @@ public class Player : MonoBehaviour
         -> bool IsHoldingObj()
         -> PlayerState SetPlayerState()
 
-public struct PlayerState
-    Constants:
-        private:
-        -> int NUM_OF_BUTTONS = 2
-    
+public class UImanager : MonoBehaviour
     Fields:
         private:
-        -> bool[] MBPressed
-        -> bool[] MBReleased
-        -> bool[] MBHeld
-        -> Vector2 mousePos
-        -> MoveableObject? heldObj
-    
-    Methods:
-        public:
-        -> int GetNumButtons()
-        -> bool GetMBPressed(int button)
-        -> bool GetMBReleased(int button)
-        -> bool GetMBHeld(int button)
-        -> Vector2 GetMousePos()
-        -> MoveableObject GetHeldObj()
+        -> bool caseRemoved
+        -> bool iceMelted
+        -> bool partsReassembled
+        -> int objectiveNum
+        -> TextMeshProUGUI objectives
+        -> BasicWin b
 
-public abstract class abTool : MoveableObject
     Methods:
-        pubic:
-        -> override void TryMouseInput(PlayerState player)
-        -> override void HeldUse(PlayerState player)
-        -> abstract void StartBaseUse()
-        -> abstract void EndBaseUse()
-    
+        private:
+        -> void Start()
+        -> void Update()
+   
 public class BasicWin : MonoBehaviour
     Fields:
         public:
@@ -93,10 +78,26 @@ public class BasicWin : MonoBehaviour
         pubic:
         -> void updateIceCount()
 
-public class CollisionSorter : IComparer<Collider2D>
-    Methods:
+public class Melt : MonoBehaviour
+    Fields:
         public:
-        -> int Compare(Collider2D x, Collider2D y)
+        -> SpriteRenderer spr
+        
+        private:
+        -> float meltRate
+        -> float minSize
+        -> Sprite lighterOff
+        -> Sprite lighterOn
+        -> BasicWin b
+
+    Methods:
+        private:
+        -> void Start()
+        -> void Update()
+        -> void OnMouseOver()
+        
+        public:
+        -> void GetMouseDown(InputAction.CallbackContext ctx)
 
 public class Dialogue : MonoBehaviour
     Fields:
@@ -122,11 +123,10 @@ public class Dialogue : MonoBehaviour
         public:
         -> void GetMouseDown(InputAction.CallbackContext ctx)
 
-public interface IInteractable
+public class CollisionSorter : IComparer<Collider2D>
     Methods:
         public:
-        -> abstract void TryMouseInput(PlayerState player)
-        -> abstract void UpdatePosition(Vector3 mousePos)
+        -> int Compare(Collider2D x, Collider2D y)
 
 public class ImmovableObj: ObjInterface
     Methods:
@@ -134,27 +134,6 @@ public class ImmovableObj: ObjInterface
         -> override void ParentPositionChanges(Vector3 newPos)
         -> override void TryMouseInput(PlayerState player)
         -> override void UpdatePosition(Vector3 mousePos)
-
-public class Melt : MonoBehaviour
-    Fields:
-        public:
-        -> SpriteRenderer spr
-        
-        private:
-        -> float meltRate
-        -> float minSize
-        -> Sprite lighterOff
-        -> Sprite lighterOn
-        -> BasicWin b
-
-    Methods:
-        private:
-        -> void Start()
-        -> void Update()
-        -> void OnMouseOver()
-        
-        public:
-        -> void GetMouseDown(InputAction.CallbackContext ctx)
 
 public class MoveableObj : ObjInterface
     Fields:
@@ -204,22 +183,40 @@ public abstract class ObjInterface : MonoBehaviour, IInteractable
 
     Methods:
         public:
-        -> void UpdatePosition(Vector3 newPos)
-        -> abstract void ParentPositionChange(Vector3 newPos)
-        -> abstract void TryMouseInput(PlayerState player)
-        -> abstract void UpdatePosition(Vector3 mousePos)
+        -> override void Move(Vector3 newPos)
+        -> override void GetInput(PlayerState player) 
 
-public class UImanager : MonoBehaviour
+public abstract class abTool : MoveableObject
+    Methods:
+        pubic:
+        -> override void TryMouseInput(PlayerState player)
+        -> override void HeldUse(PlayerState player)
+        -> abstract void StartBaseUse()
+        -> abstract void EndBaseUse()
+
+public interface IInteractable
+    Methods:
+        public:
+        -> abstract void GetInput(PlayerState player)
+
+public struct PlayerState
+    Constants:
+        private:
+        -> int NUM_OF_BUTTONS = 2
+    
     Fields:
         private:
-        -> bool caseRemoved
-        -> bool iceMelted
-        -> bool partsReassembled
-        -> int objectiveNum
-        -> TextMeshProUGUI objectives
-        -> BasicWin b
-
+        -> bool[] MBPressed
+        -> bool[] MBReleased
+        -> bool[] MBHeld
+        -> Vector2 mousePos
+        -> MoveableObject? heldObj
+    
     Methods:
-        private:
-        -> void Start()
-        -> void Update()
+        public:
+        -> int GetNumButtons()
+        -> bool GetMBPressed(int button)
+        -> bool GetMBReleased(int button)
+        -> bool GetMBHeld(int button)
+        -> Vector2 GetMousePos()
+        -> MoveableObject GetHeldObj()

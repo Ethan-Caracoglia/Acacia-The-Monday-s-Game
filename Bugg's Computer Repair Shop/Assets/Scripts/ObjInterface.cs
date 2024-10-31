@@ -11,12 +11,7 @@ public abstract class ObjInterface : MonoBehaviour, IInteractable
     public ObjInterface[] childrenObjs;
     protected Dictionary<string, Vector3> offsets = new Dictionary<string, Vector3>();
 
-    protected void Move(Vector3 mousePos)
-    {
-
-    }
-
-    public void UpdatePosition(Vector3 newPos)
+    protected override void Move(Vector3 newPos)
     {
         // Potentially make this move to top Z value and drop down?
         Vector3 pos = transform.position = new Vector3(newPos.x, newPos.y, transform.position.z);
@@ -27,9 +22,11 @@ public abstract class ObjInterface : MonoBehaviour, IInteractable
         }
     }
 
+
+    protected overred
+
+
     public abstract void ParentPositionChange(Vector3 newPos);
 
-    public abstract void TryMouseInput(PlayerState player);
 
-    public abstract void UpdatePosition(Vector3 mousePos);
 }

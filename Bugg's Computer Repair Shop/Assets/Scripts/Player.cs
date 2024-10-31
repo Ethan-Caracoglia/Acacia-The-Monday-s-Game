@@ -57,8 +57,6 @@ public class Player : MonoBehaviour
         return null;
     }
 
-    private
-
     private bool IsHoldingObj()
     {
         if (heldObj == null)
