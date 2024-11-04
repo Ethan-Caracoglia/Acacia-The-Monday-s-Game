@@ -82,12 +82,14 @@ public class Player : MonoBehaviour
         }
         
         heldObj = mObj;
+        heldObj.PickUpObj(player);
         return true;
     }
 
     // Probably not the optimal way to do this
     private void DropObj()
     {
+        heldObj.SetDownObject();
         heldObj = null;
     }
     #endregion
@@ -101,7 +103,7 @@ public class Player : MonoBehaviour
         // Update the location of a held object
         if (IsHoldingObj())
         {
-            heldObj.ParentPositionChange(mousePos);
+            heldObj.UpdateMousePosition(mousePos);
         }
     }
 

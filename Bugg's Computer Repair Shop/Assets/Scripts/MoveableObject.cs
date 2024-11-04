@@ -73,30 +73,18 @@ public class MoveableObj : ObjInterface
         snapPosition = newPos;
         if (snapped)
         {
-            UpdatePosition(snapPosition);
+            Move(snapPosition);
         }
     }
 
-    public override void UpdateMousePosition(Vector3 MousePos)
+    public void UpdateMousePosition(Vector3 MousePos)
     {
-        UpdatePosition(MousePos + offset);
+        Move(MousePos + offset);
     }
 
-    public override void TryMouseInput(PlayerState player)
+    public override void GetInput(PlayerState player)
     {
-        MoveObj(player);
-    }
-
-    /// <summary>
-    /// Responsible for the default movement of moveable Objects
-    /// </summary>
-    /// <param name="state">Mouse Input State</param>
-    private void MoveObj(PlayerState player)
-    {
-        if (player.GetMBPressed(0) && player.GetHeldObj().id == EMPTY_OBJ_ID)
-        {
-            PickUpObj(player);
-        }
+    
     }
 
     /// <summary>
@@ -104,25 +92,14 @@ public class MoveableObj : ObjInterface
     /// </summary>
     /// <param name="v">PickUpObject</param>
     /// <param name="m">PickUpObject</param>
-    protected bool PickUpObj(PlayerState player)
+    public void PickUpObj(PlayerState player)
     {
-        if (covered)
-        {
-            return false;
-        }
-
-        if (!sender.TrySetCurrentHeldObj(this))
-        {
-            return false;
-        }
-
         // Disable collider when picked up so the click propegates properly
         objCollider.enabled = false;
 
         dragging = true;
-        offset = transform.position - v;
+        offset = transform.position - new Vector3(player.GetMousePos().x, player.GetMousePos().y, 0);
         snapped = false;
-        return true;
     }
 
     /// <summary>
@@ -135,12 +112,11 @@ public class MoveableObj : ObjInterface
             return;
 
         objCollider.enabled = true;
-        Holder.SetDownObj();
         dragging = false;
 
         if ((transform.position - snapPosition).sqrMagnitude <= snapDistance)
         {
-            UpdatePosition(snapPosition);
+            Move(snapPosition);
             snapped = true;
             foreach (var mObj in coveredObjs)
             {
@@ -161,9 +137,9 @@ public class MoveableObj : ObjInterface
     /// When held, accepts mouse input. Override when needed.
     /// </summary>
     /// <param name="button">Button Pressed</param>
-    public virtual void HeldUse(PlayerState player)
+    protected virtual void HeldUse(PlayerState player)
     {
-        if(drag)
+        if(dragging)
             SetDownObject();
     }
 
@@ -171,5 +147,6 @@ public class MoveableObj : ObjInterface
     #endregion
 
     #region Setters
+    #endregion
     #endregion
 }

@@ -28,8 +28,5 @@ public abstract class ObjInterface : MonoBehaviour
 
     }
 
-    public virtual void ParentPositionChange(Vector3 newPos)
-    {
-        Move(newPos);
-    }
+    public abstract void ParentPositionChange(Vector3 newPos);
 }
