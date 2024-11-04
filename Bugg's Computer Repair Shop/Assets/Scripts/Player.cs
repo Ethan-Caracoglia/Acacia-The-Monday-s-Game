@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
     }
 
     // Finds the top Z object to interact with, and ignores all others.
-    private IInteractable? GetTopCollision()
+    private ObjInterface? GetTopCollision()
     {
         List<Collider2D> results = new List<Collider2D>();
         Physics2D.OverlapPoint(transform.position, contactFilter.NoFilter(), results);
@@ -50,7 +50,7 @@ public class Player : MonoBehaviour
         {
             if (col == null) continue;
 
-            IInteractable obj = col.gameObject.GetComponent<IInteractable>();
+            ObjInterface obj = col.gameObject.GetComponent<ObjInterface>();
             if (obj == null) continue;
             return obj;
         }
@@ -73,15 +73,15 @@ public class Player : MonoBehaviour
     }
 
     // Methods callable by the held objects
-    private bool GrabObj(MoveableObj obj)
+    private bool GrabObj(ObjInterface? obj)
     {
-        if (IsHoldingObj())
+        MoveableObj? mObj = obj as MoveableObj;
+        if (mObj == null)
         {
             return false;
         }
-
-        heldObj = obj;
-        obj.Holder = this;
+        
+        heldObj = mObj;
         return true;
     }
 
@@ -101,13 +101,7 @@ public class Player : MonoBehaviour
         // Update the location of a held object
         if (IsHoldingObj())
         {
-            GetHeldObj.UpdateMousePosition(mousePos);
-            // How update about held down
-            IInteractable topObj = GetTopCollision();
-            if (topObj != null)
-            {
-                topObj.TryMouseInput(mouseState);
-            }
+            heldObj.ParentPositionChange(mousePos);
         }
     }
 
@@ -130,26 +124,18 @@ public class Player : MonoBehaviour
             MBReleased[0] = false;
         }
 
-        // Use the object being held
+        if (!ctx.performed) 
+        {
+            return;
+        }
         if (IsHoldingObj())
         {
-            heldObj.HeldUse(player);
+            DropObj();
         }
-        else if (ctx.performed) 
+        else
         {
-            IInteractable topObj = GetTopCollision();
-        }
-
-        IInteractable topObj = GetTopCollision();
-        if (topObj != null)
-        {
-            // Change MouseState to up / down
-            topObj.TryMouseInput(mouseState);
-        }
-
-        if (ctx.canceled && currentHeldObj != null)
-        {
-            currentHeldObj.SetDownObject();
+            ObjInterface? obj = GetTopCollision();
+            GrabObj(obj);
         }
     }
 
@@ -170,6 +156,12 @@ public class Player : MonoBehaviour
         {
             MBPressed[1] = false;
             MBReleased[1] = false;
+        }
+
+        // Use the object being held
+        if (IsHoldingObj())
+        {
+            heldObj.GetInput(player);
         }
     }
 

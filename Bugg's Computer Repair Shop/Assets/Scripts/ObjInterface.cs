@@ -23,9 +23,13 @@ public abstract class ObjInterface : MonoBehaviour
     }
 
 
-    public abstract void GetInput(PlayerState player);
+    public virtual void GetInput(PlayerState player)
+    {
 
-    public abstract void ParentPositionChange(Vector3 newPos);
+    }
 
-
+    public virtual void ParentPositionChange(Vector3 newPos)
+    {
+        Move(newPos);
+    }
 }
