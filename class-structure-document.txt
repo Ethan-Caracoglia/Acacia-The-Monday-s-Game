@@ -184,7 +184,8 @@ public abstract class ObjInterface : MonoBehaviour, IInteractable
     Methods:
         public:
         -> override void Move(Vector3 newPos)
-        -> override void GetInput(PlayerState player) 
+        -> abstract void GetInput(PlayerState player)
+        -> abstract void ParentPositionChange(Vector3 newPos)
 
 public abstract class abTool : MoveableObject
     Methods:
