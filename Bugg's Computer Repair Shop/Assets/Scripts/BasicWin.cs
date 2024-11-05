@@ -4,18 +4,29 @@ using UnityEngine;
 
 public class BasicWin : MonoBehaviour
 {
-    public bool won = false;
-    [SerializeField] public MoveableObject[] parts;
+    #region Fields
+    #region public
+    public MoveableObj[] parts;
     public int iceCount = 1;
+    public bool won = false;
+    #endregion
+
+    #region private
     [SerializeField] SpriteRenderer victory;
-    // Start is called before the first frame update
-    void Start()
+    #endregion
+    #endregion
+
+    #region Methods
+    #region public
+    public void updateIceCount()
     {
-
+        iceCount -= 1;
     }
+    #endregion
 
+    #region private
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (won) return;
         if (iceCount <= 0)
@@ -35,9 +46,6 @@ public class BasicWin : MonoBehaviour
             victory.enabled = true;
         }
     }
-
-    public void updateIceCount()
-    {
-        iceCount -= 1;
-    }
+    #endregion
+    #endregion
 }

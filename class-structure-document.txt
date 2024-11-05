@@ -1,0 +1,212 @@
+Inheritance Structure
+* Player <- MonoBehaviour
+* PlayerState
+* abTool <- MoveableObj <- ObjInterface <- MonoBehaviour
+* BasicWin <- MonoBehaviour
+* CollisionSorter <- IComparer<Collider2D> 
+* Dialogue <- MonoBehaviour
+* ImmovableObj <- ObjInterface <- MonoBehaviour
+* Melt <- MonoBehaviour
+* MoveableObj <- ObjInterface <- MonoBehaviour
+* ObjInterface <- MonoBehaviour
+* UImanager <- MonoBehaviour
+
+# Handles all player input and sends it out as necessary
+# Should not be sent directly to any of the other game objects. Only its state
+# should be sent
+public class Player : MonoBehaviour
+    Fields:
+        private:
+        -> Camera mainCamera
+        -> CollisionSorter collisionSorter
+        -> MoveableObj? heldObj
+        -> PlayerState player
+        -> Vector2 mousePos
+        -> ContactFilter2D contactFilter
+        -> bool[] MBPressed
+        -> bool[] MBReleased
+
+    Methods:
+        public:
+        -> void OnMouseMove(InputAction.CallbackContext ctx)
+        -> void OnMousePrimary(InputAction.CallbackContext ctx)
+        -> void OnMouseSecondary(InputAction.CallbackContext ctx)
+        -> void QuitGame(InputAction.CallbackContext ctx)
+        -> void RestartGame(InputAction.CallbackContext ctx)
+
+        private:
+        -> ObjInterface? GetTopCollision()
+        -> bool GrabObj(ObjInterface? obj)
+        -> void DropObj()
+        -> bool IsHoldingObj()
+        -> PlayerState SetPlayerState()
+
+public class UImanager : MonoBehaviour
+    Fields:
+        private:
+        -> bool caseRemoved
+        -> bool iceMelted
+        -> bool partsReassembled
+        -> int objectiveNum
+        -> TextMeshProUGUI objectives
+        -> BasicWin b
+
+    Methods:
+        private:
+        -> void Start()
+        -> void Update()
+   
+public class BasicWin : MonoBehaviour
+    Fields:
+        public:
+        -> bool won
+        -> MoveableObj[] parts
+        -> int iceCount
+        -> SpriteRenderer victory
+    
+    Methods:
+        pubic:
+        -> void updateIceCount()
+
+        private:
+        -> void Update()
+
+public class Melt : MonoBehaviour
+    Fields:
+        public:
+        -> SpriteRenderer spr
+        
+        private:
+        -> float meltRate
+        -> float minSize
+        -> Sprite lighterOff
+        -> Sprite lighterOn
+        -> BasicWin b
+
+    Methods:
+        public:
+        -> void GetMouseDown(InputAction.CallbackContext ctx)
+
+        private:
+        -> void Update()
+        -> void OnMouseOver()
+
+public class Dialogue : MonoBehaviour
+    Fields:
+        public:
+        -> TextMeshProUGUI textComponent
+        -> string[] lines
+        -> float textSpeed
+        
+        private:
+        -> int index
+        -> bool isTyping
+        -> bool dialogueEnded
+        
+    Methods:
+        private:
+        -> void Start()
+        -> void OnDialogueClick()
+        -> void StartDialogue()
+        -> IEnumerator TypeLine()
+        -> void NextLine()
+        -> void EndDialogue()
+
+        public:
+        -> void GetMouseDown(InputAction.CallbackContext ctx)
+
+public class CollisionSorter : IComparer<Collider2D>
+    Methods:
+        public:
+        -> int Compare(Collider2D x, Collider2D y)
+
+public class ImmovableObj: ObjInterface
+    Methods:
+        public:
+        -> override void ParentPositionChanges(Vector3 newPos)
+        -> override void GetInput(PlayerState player)
+
+public class MoveableObj : ObjInterface
+    Fields:
+        public:
+        -> Sprite sprite
+        -> Sprite highlightSprite
+        -> PlayerState player
+        -> bool snapped
+        -> ObjInterface[] coveredObjs
+
+        protected:
+        -> float snapDistance
+        -> bool dragging
+        -> Vector3 offset
+        -> Vector3 snapPosition
+        -> Collider2D objCollider
+
+    Methods:
+        public:
+        -> override void ParentPositionChange(Vector3 newPos)
+        -> override void UpdateMousePosition(Vector3 newPos)
+        -> override void GetInput(PlayerState player)
+        -> void PickUpObj(PlayerState player)
+        -> void SetDownObj()
+
+        protected:
+        -> virtual void HeldUse(PlayerState player)
+
+        private:
+        -> void Start()
+        -> void Update()
+        -> void OnMouseOver()
+        -> void OnMouseExit()
+
+public abstract class ObjInterface : MonoBehaviour
+    Constants:
+        public:
+        -> string EMPTY_OBJ_ID = "EMPTY"
+    Fields:
+        public:
+        -> string id
+        -> bool covered
+        -> ObjInterface[] childObjs
+        
+        protected:
+        -> Dictionary<string, Vector3> offsets
+
+    Methods:
+        public:
+        -> abstract void GetInput(PlayerState player)
+        -> abstract void ParentPositionChange(Vector3 newPos)
+
+        protected:
+        -> void Move(Vector3 newPos)
+
+public abstract class abTool : MoveableObject
+    Methods:
+        pubic:
+        -> override void GetInput(PlayerState player)
+        -> abstract void HeldUse(PlayerState player)
+        -> abstract void StartBaseUse()
+        -> abstract void EndBaseUse()
+
+public struct PlayerState
+    Constants:
+        private:
+        -> int NUM_OF_BUTTONS = 2
+    
+    Fields:
+        private:
+        -> bool[] MBPressed
+        -> bool[] MBReleased
+        -> bool[] MBHeld
+        -> Vector2 mousePos
+        -> MoveableObject? heldObj
+    
+    Methods:
+        public:
+        -> PlayerState(bool[] MBPressed, bool[] MBReleased, Vector2 mousePos, MoveableObj? heldObj)
+        -> int GetNumButtons()
+        -> bool GetMBPressed(int button)
+        -> bool GetMBReleased(int button)
+        -> bool GetMBHeld(int button)
+        -> Vector2 GetMousePos()
+        -> MoveableObj? GetHeldObj()
