@@ -6,3 +6,8 @@ Refactored single "Moveable Object" class into like, a lot of interfaces
 -Immovable Object: Cannot be Moved, eats interaction inputs.
 -Moveable Object: Can be moved, useful class for any object that would want to be moved.
 -abTool: abstract tool class. pick up and put down with left mouse, use with right click. (currently unused)
+
+Added a menu and scene transitions for the game
+Added art assets for desk background, lighter, ice
+Added a checklist for objectives that updates when they are finished
+Added score system for the games
