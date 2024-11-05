@@ -1,15 +1,14 @@
 Inheritance Structure
 * Player <- MonoBehaviour
 * PlayerState
-* abTool <- MoveableObj <- ObjInterface <- MonoBehaviour, IInteractable
+* abTool <- MoveableObj <- ObjInterface <- MonoBehaviour
 * BasicWin <- MonoBehaviour
 * CollisionSorter <- IComparer<Collider2D> 
 * Dialogue <- MonoBehaviour
-* IInteractable
-* ImmovableObj <- ObjInterface <- MonoBehaviour, IInteractable
+* ImmovableObj <- ObjInterface <- MonoBehaviour
 * Melt <- MonoBehaviour
-* MoveableObj <- ObjInterface <- MonoBehaviour, IInteractable
-* ObjInterface <- MonoBehaviour, IInteractable
+* MoveableObj <- ObjInterface <- MonoBehaviour
+* ObjInterface <- MonoBehaviour
 * UImanager <- MonoBehaviour
 
 # Handles all player input and sends it out as necessary
@@ -36,14 +35,9 @@ public class Player : MonoBehaviour
         -> void RestartGame(InputAction.CallbackContext ctx)
 
         private:
-        -> IInteractable GetTopCollision()
-
-        # Get rid of these vvv
-        -> bool GrabObj(MoveableObj obj)
+        -> ObjInterface? GetTopCollision()
+        -> bool GrabObj(ObjInterface? obj)
         -> void DropObj()
-        # Get rid of these ^^^ 
-        # I think these would be best done in Mouse State
-
         -> bool IsHoldingObj()
         -> PlayerState SetPlayerState()
 
@@ -66,17 +60,16 @@ public class BasicWin : MonoBehaviour
     Fields:
         public:
         -> bool won
-        -> MoveableObject[] parts
+        -> MoveableObj[] parts
         -> int iceCount
         -> SpriteRenderer victory
     
     Methods:
-        private:
-        -> void Start()
-        -> void Update()
-
         pubic:
         -> void updateIceCount()
+
+        private:
+        -> void Update()
 
 public class Melt : MonoBehaviour
     Fields:
@@ -91,13 +84,12 @@ public class Melt : MonoBehaviour
         -> BasicWin b
 
     Methods:
-        private:
-        -> void Start()
-        -> void Update()
-        -> void OnMouseOver()
-        
         public:
         -> void GetMouseDown(InputAction.CallbackContext ctx)
+
+        private:
+        -> void Update()
+        -> void OnMouseOver()
 
 public class Dialogue : MonoBehaviour
     Fields:
@@ -132,8 +124,7 @@ public class ImmovableObj: ObjInterface
     Methods:
         public:
         -> override void ParentPositionChanges(Vector3 newPos)
-        -> override void TryMouseInput(PlayerState player)
-        -> override void UpdatePosition(Vector3 mousePos)
+        -> override void GetInput(PlayerState player)
 
 public class MoveableObj : ObjInterface
     Fields:
@@ -154,21 +145,21 @@ public class MoveableObj : ObjInterface
     Methods:
         public:
         -> override void ParentPositionChange(Vector3 newPos)
-        -> override void TryMouseInput(PlayerState player)
+        -> override void UpdateMousePosition(Vector3 newPos)
+        -> override void GetInput(PlayerState player)
+        -> void PickUpObj(PlayerState player)
         -> void SetDownObj()
-        -> virtual void HeldUse(PlayerState player)
 
         protected:
-        -> bool PickUpObj(PlayerState player)
+        -> virtual void HeldUse(PlayerState player)
 
         private:
         -> void Start()
         -> void Update()
         -> void OnMouseOver()
         -> void OnMouseExit()
-        -> void MoveObj(player)
 
-public abstract class ObjInterface : MonoBehaviour, IInteractable
+public abstract class ObjInterface : MonoBehaviour
     Constants:
         public:
         -> string EMPTY_OBJ_ID = "EMPTY"
@@ -176,29 +167,26 @@ public abstract class ObjInterface : MonoBehaviour, IInteractable
         public:
         -> string id
         -> bool covered
-        -> ObjInterface[] childrenObjs
+        -> ObjInterface[] childObjs
         
         protected:
         -> Dictionary<string, Vector3> offsets
 
     Methods:
         public:
-        -> override void Move(Vector3 newPos)
         -> abstract void GetInput(PlayerState player)
         -> abstract void ParentPositionChange(Vector3 newPos)
+
+        protected:
+        -> void Move(Vector3 newPos)
 
 public abstract class abTool : MoveableObject
     Methods:
         pubic:
-        -> override void TryMouseInput(PlayerState player)
-        -> override void HeldUse(PlayerState player)
+        -> override void GetInput(PlayerState player)
+        -> abstract void HeldUse(PlayerState player)
         -> abstract void StartBaseUse()
         -> abstract void EndBaseUse()
-
-public interface IInteractable
-    Methods:
-        public:
-        -> abstract void GetInput(PlayerState player)
 
 public struct PlayerState
     Constants:
@@ -215,9 +203,10 @@ public struct PlayerState
     
     Methods:
         public:
+        -> PlayerState(bool[] MBPressed, bool[] MBReleased, Vector2 mousePos, MoveableObj? heldObj)
         -> int GetNumButtons()
         -> bool GetMBPressed(int button)
         -> bool GetMBReleased(int button)
         -> bool GetMBHeld(int button)
         -> Vector2 GetMousePos()
-        -> MoveableObject GetHeldObj()
+        -> MoveableObj? GetHeldObj()

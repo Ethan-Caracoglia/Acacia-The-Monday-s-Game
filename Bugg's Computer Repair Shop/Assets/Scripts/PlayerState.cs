@@ -19,6 +19,7 @@ public struct PlayerState
     #endregion
 
     #region Fields
+    #region private
     /** "MB" stands for Mouse Button(s) */
     private bool[] MBPressed; // MBPressed[i] == true when the button was pressed this frame
     private bool[] MBReleased; // MBReleased[i] == true on and after the frame it is released
@@ -26,8 +27,10 @@ public struct PlayerState
     private Vector2 mousePos; // The world position of the mouse
     private MoveableObj? heldObj; // The object (if any) that is being held
     #endregion
+    #endregion
 
-    #region Internal Methods
+    #region Methods
+    #region public
     public PlayerState(bool[] MBPressed, bool[] MBReleased, Vector2 mousePos, MoveableObj? heldObj)
     {
         this.MBPressed = MBPressed;
@@ -42,9 +45,7 @@ public struct PlayerState
             this.MBHeld[i] = !this.MBReleased[i];
         }
     }
-    #endregion
 
-    #region External Methods
     public int GetNumButtons()
     {
         return NUM_OF_BUTTONS;
@@ -73,7 +74,8 @@ public struct PlayerState
 
     public MoveableObj? GetHeldObj()
     {
-        return this.heldObj;
+        return heldObj;
     }
+    #endregion
     #endregion
 }

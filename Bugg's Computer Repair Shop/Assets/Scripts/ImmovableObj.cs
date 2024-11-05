@@ -4,18 +4,17 @@ using UnityEngine;
 
 public class ImmovableObj : ObjInterface
 {
+    #region Methods
+    #region public
     public override void ParentPositionChange(Vector3 newPos)
     {
-        UpdatePosition(newPos);
+        Move(newPos);
     }
 
-    public override void TryMouseInput(InteractionState state)
+    public override void GetInput(PlayerState player)
     {
         return;
     }
-
-    public override void UpdateMousePosition(Vector3 MousePos)
-    {
-        return;
-    }
+    #endregion
+    #endregion
 }

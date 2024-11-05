@@ -8,7 +8,7 @@ using UnityEngine;
 public class MoveableObj : ObjInterface
 {
     #region Fields
-    #region Public Fields
+    #region public
     public Sprite sprite; // Base sprite 
     public Sprite highlightSprite;
     public PlayerState player;
@@ -16,7 +16,7 @@ public class MoveableObj : ObjInterface
     public ObjInterface[] coveredObjs;
     #endregion
 
-    #region Protected Fields
+    #region protected
     [SerializeField] protected float snapDistance = 0.01f;
     protected bool dragging = false;
     protected Vector3 offset;
@@ -25,49 +25,8 @@ public class MoveableObj : ObjInterface
     #endregion
     #endregion
 
-    #region Internal Methods
-    /// <summary>
-    /// Setup the 
-    /// </summary>
-    void Start()
-    {
-        objCollider = GetComponent<Collider2D>();
-
-        snapPosition = transform.position;
-        foreach (var mObj in childrenObjs)
-        {
-            offsets.Add(mObj.id, mObj.transform.position - transform.position);
-        }
-        foreach (var mObj in coveredObjs)
-        {
-            mObj.covered = true;
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (dragging)
-        {
-            // Add wiggle, if wanted
-
-        }
-    }
-
-    // Might need to be changed
-    // Ethan: Don't change this for now since it just works 
-    void OnMouseOver()
-    {
-        transform.GetComponent<SpriteRenderer>().sprite = highlightSprite;
-    }
-
-    void OnMouseExit()
-    {
-        transform.GetComponent<SpriteRenderer>().sprite = sprite;
-    }
-    #endregion
-
-    #region External Methods
+    #region Methods
+    #region public
     public override void ParentPositionChange(Vector3 newPos)
     {
         snapPosition = newPos;
@@ -77,14 +36,14 @@ public class MoveableObj : ObjInterface
         }
     }
 
-    public void UpdateMousePosition(Vector3 MousePos)
+    public void UpdateMousePosition(Vector3 newPos)
     {
-        Move(MousePos + offset);
+        Move(newPos + offset);
     }
 
     public override void GetInput(PlayerState player)
     {
-    
+        return;
     }
 
     /// <summary>
@@ -131,22 +90,57 @@ public class MoveableObj : ObjInterface
             }
         }
     }
+    #endregion
 
-
+    #region protected
     /// <summary>
     /// When held, accepts mouse input. Override when needed.
     /// </summary>
     /// <param name="button">Button Pressed</param>
     protected virtual void HeldUse(PlayerState player)
     {
-        if(dragging)
+        if (dragging)
             SetDownObject();
     }
-
-    #region Getters
     #endregion
 
-    #region Setters
+    #region private
+    private void Start()
+    {
+        objCollider = GetComponent<Collider2D>();
+
+        snapPosition = transform.position;
+        foreach (var mObj in childObjs)
+        {
+            offsets.Add(mObj.id, mObj.transform.position - transform.position);
+        }
+        foreach (var mObj in coveredObjs)
+        {
+            mObj.covered = true;
+        }
+    }
+
+    // Update is called once per frame
+    private void Update()
+    {
+        if (dragging)
+        {
+            // Add wiggle, if wanted
+
+        }
+    }
+
+    // Might need to be changed
+    // Ethan: Don't change this for now since it just works 
+    private void OnMouseOver()
+    {
+        transform.GetComponent<SpriteRenderer>().sprite = highlightSprite;
+    }
+
+    private void OnMouseExit()
+    {
+        transform.GetComponent<SpriteRenderer>().sprite = sprite;
+    }
     #endregion
     #endregion
 }

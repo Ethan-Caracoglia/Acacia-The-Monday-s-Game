@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class CollisionSorter : IComparer<Collider2D>
 {
+    #region Methods
+    #region public
     /// <summary>
     /// Checks if x has a lower z value than y.
     /// </summary>
@@ -20,4 +22,6 @@ public class CollisionSorter : IComparer<Collider2D>
 
         return x.gameObject.transform.position.z.CompareTo(y.gameObject.transform.position.z);
     }
+    #endregion
+    #endregion
 }
