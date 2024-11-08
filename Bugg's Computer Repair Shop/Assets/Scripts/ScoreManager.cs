@@ -6,55 +6,32 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
     [SerializeField]
-    UImanager objectives;
+    UImanager iceObjectives;
 
-    // Score for each objective
+    #region Future Code
+    // Not needed until more than one minigame
     /*
     [SerializeField]
-    int caseRemovedScore = -1;
-    [SerializeField]
-    int iceMeltedScore = -1;
-    [SerializeField]
-    int partsReassembledScore = -1;
+    int activeMinigame;
     */
+    // 0 = ice;
+    #endregion
+
     [SerializeField]
     int totalScore = 0;
     int calculateTotalScore = 0;
     int totalPossibleScore = 0;
 
+    // Lists for objective/score management
     [SerializeField]
     List<int> objectivesScore;
     [SerializeField]
     List<bool> objectivesProgress;
     [SerializeField]
     List<int> objectivesDelay;
+
     [SerializeField]
     int objectivesAmount;
-
-
-    /*
-    public int CaseRemovedScore
-    {
-        get
-        {
-            return caseRemovedScore;
-        }
-    }
-    public int IceMeltedScore
-    {
-        get
-        {
-            return caseRemovedScore;
-        }
-    }
-    public int PartsReassembledScore
-    {
-        get
-        {
-            return caseRemovedScore;
-        }
-    }
-    */
 
     // Keeps track of time taken for an objectove
     [SerializeField]
@@ -70,6 +47,16 @@ public class ScoreManager : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI scoreDisplay;
+    
+    public List<int> ObjectivesScore
+    {
+        get
+        {
+            return objectivesScore;
+        }
+    }
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -93,53 +80,31 @@ public class ScoreManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Hard coded for ice minigame
-        objectivesProgress[0] = objectives.CaseRemoved;
-        objectivesProgress[1] = objectives.IceMelted;
-        objectivesDelay[1] = 4;
-        objectivesProgress[2] = objectives.PartsReassembled;
-        
-        // Old Code
+        #region Future Code
+        // Not Needed until there is more than one minigame
         /*
-        if (currentObjective == 0)
+        switch (activeMinigame)
         {
-            if (caseRemovedScore == -1)
-            {
-                caseRemovedScore = ScoreTimer(objectivesProgress[0], caseRemovedDelay);
-            }
-            else
-            {
-                timer = 0;
-                currentObjective = 1;
-            }
-        }
-        if (currentObjective == 1)
-        {
-            if (iceMeltedScore == -1)
-            {
-                iceMeltedScore = ScoreTimer(objectivesProgress[1], iceMeltedDelay);
-            }
-            else
-            {
-                timer = 0;
-                currentObjective = 2;
-            }
-        }
-        if (currentObjective == 2)
-        {
-            if (partsReassembledScore == -1)
-            {
-                partsReassembledScore = ScoreTimer(objectivesProgress[2], partsReassembledDelay);
-            }
-            else
-            {
-                timer = 0;
-                currentObjective = 3;
-                objectivesDone = true;
-            }
+            case 0:
+                #region Ice Minigame
+                objectivesProgress[0] = iceObjectives.CaseRemoved;
+                objectivesProgress[1] = iceObjectives.IceMelted;
+                objectivesDelay[1] = 4;
+                objectivesProgress[2] = iceObjectives.PartsReassembled;
+                #endregion
+                break;
         }
         */
-        
+        #endregion
+
+        // Hard coded for Ice Minigame
+        #region Ice Minigame
+        objectivesProgress[0] = iceObjectives.CaseRemoved;
+        objectivesProgress[1] = iceObjectives.IceMelted;
+        objectivesDelay[1] = 4;
+        objectivesProgress[2] = iceObjectives.PartsReassembled;
+        #endregion
+
         // Runs for each objective
         if (currentObjective < objectivesAmount)
         {

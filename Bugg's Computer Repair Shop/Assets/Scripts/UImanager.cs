@@ -45,7 +45,9 @@ public class UImanager : MonoBehaviour
     [SerializeField]
     BasicWin b;
 
-
+    //get the Score Manager script to pull the score list from
+    [SerializeField]
+    ScoreManager s;
 
 
     // Start is called before the first frame update
@@ -83,23 +85,29 @@ public class UImanager : MonoBehaviour
         //Change the lines of text depending on if that objective is done or not. ObjectiveNum makes sure steps can only be completed one time and in order
 
         //Is the case open?
-        if (caseRemoved == true && objectiveNum == 0)
+        if (caseRemoved == true && objectiveNum == 0 && s.ObjectivesScore[0] != -1)
         {
-            objectives.text = "Objectives:\r\nMelt the Ice\r\nReassemble and Close";
+            //objectives.text = "Objectives:\r\nMelt the Ice\r\nReassemble and Close";
+            // Placeholder text until Objective list UI is updated
+            objectives.text = $"Objectives:\r\nOpen Case - Score:{s.ObjectivesScore[0]}\r\nMelt the Ice\r\nReassemble and Close";
             objectiveNum++;
         }
 
         //Is the ice melted?
-        if (iceMelted == true && objectiveNum == 1)
+        if (iceMelted == true && objectiveNum == 1 && s.ObjectivesScore[1] != -1)
         {
-            objectives.text = "Objectives:\r\nReassemble and Close";
+            //objectives.text = "Objectives:\r\nReassemble and Close";
+            // Placeholder text until Objective list UI is updated
+            objectives.text = $"Objectives:\r\nOpen Case - Score:{s.ObjectivesScore[0]}\r\nMelt the Ice - Score:{s.ObjectivesScore[1]}\r\nReassemble and Close";
             objectiveNum++;
         }
 
         //is the case Reassembled?
-        if (partsReassembled == true && objectiveNum == 2)
+        if (partsReassembled == true && objectiveNum == 2 && s.ObjectivesScore[2] != -1)
         {
-            objectives.text = "Objectives complete!";
+            //objectives.text = "Objectives complete!";
+            // Placeholder text until Objective list UI is updated
+            objectives.text = $"Objectives:\r\nOpen Case - Score:{s.ObjectivesScore[0]}\r\nMelt the Ice - Score:{s.ObjectivesScore[1]}\r\nReassemble and Close - Score:{s.ObjectivesScore[2]}";
             objectiveNum++;
         }
     }

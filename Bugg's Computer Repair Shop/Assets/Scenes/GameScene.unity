@@ -156,8 +156,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -220.54, y: 149}
-  m_SizeDelta: {x: 334.7121, y: 97.2187}
+  m_AnchoredPosition: {x: -198.90744, y: 170}
+  m_SizeDelta: {x: 377.9772, y: 97.2187}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &515495286
 MonoBehaviour:
@@ -1205,6 +1205,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectives: {fileID: 515495286}
   b: {fileID: 2067602821}
+  s: {fileID: 1163784707}
 --- !u!4 &1163784706
 Transform:
   m_ObjectHideFlags: 0
@@ -1232,13 +1233,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d151d52e6a161245b5903bc4102bd82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectives: {fileID: 1163784705}
-  caseRemovedScore: -1
-  iceMeltedScore: -1
-  partsReassembledScore: -1
+  iceObjectives: {fileID: 1163784705}
   totalScore: 0
   objectivesScore: 
   objectivesProgress: 
+  objectivesDelay: 
   objectivesAmount: 3
   timer: 0
   currentObjective: 0
