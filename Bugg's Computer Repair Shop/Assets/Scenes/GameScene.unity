@@ -181,8 +181,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e2e88adbb8d99934b9191122a2fe8b1b, type: 2}
+  m_sharedMaterial: {fileID: 1971810818579987230, guid: e2e88adbb8d99934b9191122a2fe8b1b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -400,12 +400,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: ComputerHinge
-  childrenObjs: []
-  objSprite: {fileID: 517167034}
+  covered: 0
+  childObjs: []
   sprite: {fileID: 21300000, guid: 12dc06e8c289e3643b50bb0a022155d1, type: 3}
   highlightSprite: {fileID: 21300000, guid: c4ed63fd2d197b842b1f29a3b5f2fb20, type: 3}
-  Holder: {fileID: 0}
   snapped: 1
+  coveredObjs: []
   snapDistance: 0.02
 --- !u!1 &576361128
 GameObject:
@@ -474,15 +474,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76fe74886b95d13438ecc9eb6a14f107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: lighter
-  childrenObjs: []
-  objSprite: {fileID: 837145967}
-  sprite: {fileID: 21300000, guid: f1f35b0eb39f8a04891a9c7c450e157c, type: 3}
-  highlightSprite: {fileID: 21300000, guid: f1f35b0eb39f8a04891a9c7c450e157c, type: 3}
-  Holder: {fileID: 0}
-  snapped: 1
-  snapDistance: 0.01
-  active: {fileID: 21300000, guid: 5b67bb9308269a84f979537329f19250, type: 3}
 --- !u!212 &837145967
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -740,12 +731,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: Computer_CPU
-  childrenObjs: []
-  objSprite: {fileID: 930387621}
+  covered: 0
+  childObjs: []
   sprite: {fileID: 21300000, guid: c81a9dfbce1e0964981be8585ce5aa3f, type: 3}
   highlightSprite: {fileID: 21300000, guid: 8a49f56f3dd1fd14094c29e90f9580c2, type: 3}
-  Holder: {fileID: 0}
   snapped: 1
+  coveredObjs: []
   snapDistance: 0.02
 --- !u!1 &980421152
 GameObject:
@@ -846,12 +837,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: Computer_Extra
-  childrenObjs: []
-  objSprite: {fileID: 980421154}
+  covered: 0
+  childObjs: []
   sprite: {fileID: 21300000, guid: 50f5b78e1cab8044bb9ee90b8e21516d, type: 3}
   highlightSprite: {fileID: 21300000, guid: 26b6828e253fe924dafd770dbb447035, type: 3}
-  Holder: {fileID: 0}
   snapped: 1
+  coveredObjs: []
   snapDistance: 0.02
 --- !u!61 &980421157
 BoxCollider2D:
@@ -959,8 +950,8 @@ MonoBehaviour:
 
     Right Click to use tools'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e2e88adbb8d99934b9191122a2fe8b1b, type: 2}
+  m_sharedMaterial: {fileID: 1971810818579987230, guid: e2e88adbb8d99934b9191122a2fe8b1b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1491,7 +1482,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 
-  childrenObjs: []
+  covered: 0
+  childObjs: []
 --- !u!1 &1737736124
 GameObject:
   m_ObjectHideFlags: 0
@@ -2124,13 +2116,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: Computer_Motherboard
-  childrenObjs:
-  - {fileID: 930387623}
-  objSprite: {fileID: 2066335438}
+  covered: 0
+  childObjs: []
   sprite: {fileID: 21300000, guid: 2f7827bafdf048d429012676854da11b, type: 3}
   highlightSprite: {fileID: 21300000, guid: 325b30dcadf22614eac76d16d15331da, type: 3}
-  Holder: {fileID: 0}
   snapped: 1
+  coveredObjs: []
   snapDistance: 0.02
 --- !u!1 &2067602818
 GameObject:
@@ -2229,13 +2220,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e51ae06c3092e746bd69e1bb40b0e1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  won: 0
   parts:
   - {fileID: 517167036}
   - {fileID: 930387623}
   - {fileID: 2066335440}
   - {fileID: 980421156}
   iceCount: 1
+  won: 0
   victory: {fileID: 2067602819}
 --- !u!1 &2083173533
 GameObject:
