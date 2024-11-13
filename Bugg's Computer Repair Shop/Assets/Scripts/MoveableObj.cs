@@ -47,10 +47,9 @@ public class MoveableObj : ObjInterface
     }
 
     /// <summary>
-    /// Picks up an object when the mouse is at v
+    /// Picks up an object
     /// </summary>
-    /// <param name="v">PickUpObject</param>
-    /// <param name="m">PickUpObject</param>
+    /// <param name="player">The state of the player</param>
     public void PickUpObj(PlayerState player)
     {
         // Disable collider when picked up so the click propegates properly

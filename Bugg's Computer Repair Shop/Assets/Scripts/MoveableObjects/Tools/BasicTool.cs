@@ -9,16 +9,21 @@ public class BasicTool : abTool
 
     [SerializeField] Sprite active;
 
+    
     public override void StartBaseUse()
     {
-        objSprite.sprite = active;
+        // objSprite.sprite = active;
     }
 
     public override void EndBaseUse()
     {
-        objSprite.sprite = sprite;
+        // objSprite.sprite = sprite;
     }
+ 
 
-
+    public override void HeldUse()
+    {
+        
+    }
 
 }

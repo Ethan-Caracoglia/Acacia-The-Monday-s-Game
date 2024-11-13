@@ -76,6 +76,18 @@ public struct PlayerState
     {
         return heldObj;
     }
+
+    public override string ToString()
+    {
+        return $"LeftMousePressed: {MBPressed[0]}\n" +
+            $"LeftMouseReleased: {MBReleased[0]}\n" +
+            $"LeftMouseHeld: {MBHeld[0]}\n" +
+            $"RightMousePressed: {MBPressed[1]}\n" +
+            $"RightMouseReleased: {MBReleased[1]}\n" +
+            $"RightMouseHeld: {MBHeld[1]}\n" +
+            $"MousePos: {mousePos}\n" +
+            $"HeldObj: {heldObj}";
+    }
     #endregion
     #endregion
 }

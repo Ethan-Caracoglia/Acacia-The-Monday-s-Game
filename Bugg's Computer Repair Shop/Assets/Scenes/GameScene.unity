@@ -474,6 +474,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76fe74886b95d13438ecc9eb6a14f107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 
+  covered: 0
+  childObjs: []
+  sprite: {fileID: 0}
+  highlightSprite: {fileID: 0}
+  snapped: 1
+  coveredObjs: []
+  snapDistance: 0.01
+  active: {fileID: 0}
 --- !u!212 &837145967
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1906,12 +1915,12 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1995033109}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: OnMousePrimary
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1920,18 +1929,30 @@ MonoBehaviour:
     m_ActionId: 5426fde7-9e2a-4d76-9f3f-a6a933a83645
     m_ActionName: Main/Primary Action[/Mouse/leftButton]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1995033109}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: OnMouseSecondary
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: fd1d9b8a-0fa7-40e9-9424-a0d9ebbfeeec
     m_ActionName: Main/Secondary Action[/Mouse/rightButton]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1995033109}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: OnMouseMove
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1941,8 +1962,8 @@ MonoBehaviour:
     m_ActionName: Main/Move[/Mouse/position]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MoveMouse, Assembly-CSharp
+      - m_Target: {fileID: 1995033109}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
         m_MethodName: QuitGame
         m_Mode: 0
         m_Arguments:
@@ -1955,6 +1976,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 76808ce1-a90a-4e4a-8272-891f13f212ed
     m_ActionName: Main/Quit Game[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1995033109}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: RestartGame
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3ba1c865-13ed-4d89-bf10-205f69938a35
+    m_ActionName: Main/Restart Game[/Keyboard/r]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Main

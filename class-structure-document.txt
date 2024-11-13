@@ -17,7 +17,6 @@ Inheritance Structure
 public class Player : MonoBehaviour
     Fields:
         private:
-        -> Camera mainCamera
         -> CollisionSorter collisionSorter
         -> MoveableObj? heldObj
         -> PlayerState player
