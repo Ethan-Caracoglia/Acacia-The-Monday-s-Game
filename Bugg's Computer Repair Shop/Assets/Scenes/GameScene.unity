@@ -406,6 +406,7 @@ MonoBehaviour:
   snapped: 1
   coveredObjs: []
   snapDistance: 0.01
+  objCollider: {fileID: 517167035}
 --- !u!1 &576361128
 GameObject:
   m_ObjectHideFlags: 0
@@ -591,6 +592,7 @@ MonoBehaviour:
   snapped: 1
   coveredObjs: []
   snapDistance: 0.01
+  objCollider: {fileID: 837145969}
 --- !u!1 &930387619
 GameObject:
   m_ObjectHideFlags: 0
@@ -742,6 +744,7 @@ MonoBehaviour:
   snapped: 1
   coveredObjs: []
   snapDistance: 0.01
+  objCollider: {fileID: 930387622}
 --- !u!1 &980421152
 GameObject:
   m_ObjectHideFlags: 0
@@ -892,6 +895,7 @@ MonoBehaviour:
   snapped: 1
   coveredObjs: []
   snapDistance: 0.01
+  objCollider: {fileID: 980421157}
 --- !u!1 &997582790
 GameObject:
   m_ObjectHideFlags: 0
@@ -2154,6 +2158,7 @@ MonoBehaviour:
   snapped: 1
   coveredObjs: []
   snapDistance: 0.01
+  objCollider: {fileID: 2066335439}
 --- !u!1 &2067602818
 GameObject:
   m_ObjectHideFlags: 0
