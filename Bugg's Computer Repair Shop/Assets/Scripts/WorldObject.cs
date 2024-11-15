@@ -93,7 +93,7 @@ public class WorldObject : MonoBehaviour
 
         if ((transform.position - snapPosition).sqrMagnitude <= snapDistance)
         {
-            Move(snapPosition);
+            Move(snapPosition - offset);
             snapped = true;
             foreach (var mObj in coveredObjs)
             {
