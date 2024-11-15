@@ -5,8 +5,18 @@ using UnityEngine;
 public class Lighter : WorldObject
 {
     public GameObject flameParticle;
+    public Melt ice;
     public float interval = 0.5f;
     private float timeSinceLastAction = 0f;
+    private bool isMelting;
+
+    private void Update()
+    {
+        if (isMelting)
+        {
+            ice.Melting();
+        }
+    }
 
     public override void GetInput(Player player)
     {
@@ -25,6 +35,8 @@ public class Lighter : WorldObject
 
     protected override void HeldUse(Player player)
     {
+        
+
         gameObject.GetComponent<SpriteRenderer>().sprite = highlightSprite;
         timeSinceLastAction += Time.deltaTime;
         if (timeSinceLastAction >= interval)
