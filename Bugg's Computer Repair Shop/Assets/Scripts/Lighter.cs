@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Lighter : WorldObject
@@ -9,43 +10,46 @@ public class Lighter : WorldObject
     public float interval = 0.5f;
     private float timeSinceLastAction = 0f;
     private bool isMelting;
+    private bool beingUsed = false;
+
 
     private void Update()
     {
+        if ((beingUsed))
+        {
+            HeldUse();
+        }
         if (isMelting)
         {
             ice.Melting();
         }
     }
-    private bool isHeld;
+
+
+    public override void SetDown()
+    {
+        base.SetDown();
+
+        beingUsed = false;
+        gameObject.GetComponent<SpriteRenderer>().sprite = sprite;
+    }
 
     public override void GetInput(Player player)
     {
         Debug.Log("Lighter GetInput()");
-
-        if (!player.MBReleased[1])
+        beingUsed = !player.MBReleased[1];
+        if (beingUsed)
         {
-            Debug.Log("Did it make it to HeldUse()?");
-            HeldUse(player);
+            gameObject.GetComponent<SpriteRenderer>().sprite = highlightSprite;
         }
         else
         {
             gameObject.GetComponent<SpriteRenderer>().sprite = sprite;
         }
     }
-    private void Update()
-    {
-        if (isHeld)
-        {
-            HeldUse();
-        }
-    }
 
-    protected override void HeldUse(Player player)
+    protected void HeldUse()
     {
-        
-
-        gameObject.GetComponent<SpriteRenderer>().sprite = highlightSprite;
         timeSinceLastAction += Time.deltaTime;
         if (timeSinceLastAction >= interval)
         {
