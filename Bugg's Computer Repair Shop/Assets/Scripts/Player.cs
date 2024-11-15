@@ -86,7 +86,6 @@ public class Player : MonoBehaviour
     {
         HeldObj = obj;
         HeldObj.PickedUp(this);
-        Debug.Log("Is this being called every frame?");
     }
 
     // Probably not the optimal way to do this
@@ -163,9 +162,9 @@ public class Player : MonoBehaviour
         }
 
         // Use the object being held
-        if (IsHoldingObj)
+        if (IsHoldingObj && !MBReleased[1])
         {
-            HeldObj?.GetInput(this);
+            HeldObj.GetInput(this);
         }
     }
 

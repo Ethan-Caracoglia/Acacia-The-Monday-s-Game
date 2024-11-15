@@ -10,12 +10,14 @@ public class Lighter : WorldObject
 
     public override void GetInput(Player player)
     {
-        if (player.MBHeld[1])
+        Debug.Log("Lighter GetInput()");
+
+        if (!player.MBReleased[1])
         {
+            Debug.Log("Did it make it to HeldUse()?");
             HeldUse(player);
         }
-
-        if (player.MBReleased[1])
+        else
         {
             gameObject.GetComponent<SpriteRenderer>().sprite = sprite;
         }

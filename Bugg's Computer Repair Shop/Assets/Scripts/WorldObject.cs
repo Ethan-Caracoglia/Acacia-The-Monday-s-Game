@@ -55,7 +55,7 @@ public class WorldObject : MonoBehaviour
     /// Grabs Playe
     /// </summary>
     /// <param name="player"></param>
-    public virtual void GetInput(Player player) {}
+    public virtual void GetInput(Player player) { Debug.Log("WorldObject GetInput()"); }
 
     /// <summary>
     /// Picks up an object
