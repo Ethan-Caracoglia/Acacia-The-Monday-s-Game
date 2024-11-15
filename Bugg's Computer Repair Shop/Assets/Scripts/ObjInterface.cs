@@ -4,16 +4,12 @@ using UnityEngine;
 public abstract class ObjInterface : MonoBehaviour
 {
     #region Fields
-    #region public
     public const string EMPTY_OBJ_ID = "EMPTY";
     public string id;
     public bool covered = false;
     public ObjInterface[] childObjs;
-    #endregion
-
-    #region protected
+    
     protected Dictionary<string, Vector3> offsets = new Dictionary<string, Vector3>();
-    #endregion
     #endregion
 
     #region Methods

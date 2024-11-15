@@ -24,20 +24,20 @@ public struct PlayerState
     private bool[] MBPressed; // MBPressed[i] == true when the button was pressed this frame
     private bool[] MBReleased; // MBReleased[i] == true on and after the frame it is released
     private bool[] MBHeld; // MBHeld[i] == true until MBReleased[i] == true
-    private Vector2 mousePos; // The world position of the mouse
-    private MoveableObj? heldObj; // The object (if any) that is being held
+    private Vector2 MousePos; // The world position of the mouse
+    private MoveableObj? HeldObj; // The object (if any) that is being held
     #endregion
     #endregion
 
     #region Methods
     #region public
-    public PlayerState(bool[] MBPressed, bool[] MBReleased, Vector2 mousePos, MoveableObj? heldObj)
+    public PlayerState(bool[] MBPressed, bool[] MBReleased, Vector2 MousePos, MoveableObj? HeldObj)
     {
         this.MBPressed = MBPressed;
         this.MBReleased = MBReleased;
         this.MBHeld = new bool[NUM_OF_BUTTONS];
-        this.mousePos = mousePos;
-        this.heldObj = heldObj;
+        this.MousePos = MousePos;
+        this.HeldObj = HeldObj;
 
         for (int i = 0; i < NUM_OF_BUTTONS; i++)
         {
@@ -68,13 +68,13 @@ public struct PlayerState
 
     public Vector2 GetMousePos()
     {
-        Vector2 position = new Vector2(mousePos.x, mousePos.y);
+        Vector2 position = new Vector2(MousePos.x, MousePos.y);
         return position;
     }
 
     public MoveableObj? GetHeldObj()
     {
-        return heldObj;
+        return HeldObj;
     }
 
     public override string ToString()
@@ -85,8 +85,8 @@ public struct PlayerState
             $"RightMousePressed: {MBPressed[1]}\n" +
             $"RightMouseReleased: {MBReleased[1]}\n" +
             $"RightMouseHeld: {MBHeld[1]}\n" +
-            $"MousePos: {mousePos}\n" +
-            $"HeldObj: {heldObj}";
+            $"MousePos: {MousePos}\n" +
+            $"HeldObj: {HeldObj}";
     }
     #endregion
     #endregion

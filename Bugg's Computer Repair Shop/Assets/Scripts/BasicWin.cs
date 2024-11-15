@@ -6,7 +6,7 @@ public class BasicWin : MonoBehaviour
 {
     #region Fields
     #region public
-    public MoveableObj[] parts;
+    public WorldObject[] parts;
     public int iceCount = 1;
     public bool won = false;
     #endregion

@@ -10,15 +10,29 @@ public class Player : MonoBehaviour
 {
     #nullable enable
     #region Fields
-    #region private
     private CollisionSorter collisionSorter;
-    private MoveableObj? heldObj;
-    private PlayerState player;
-    private Vector2 mousePos;
     private ContactFilter2D contactFilter;
-    private bool[] MBPressed;
-    private bool[] MBReleased;
     #endregion
+
+    #region Properties
+    public WorldObject? HeldObj { get; private set; }
+    public Vector3 MousePos { get; private set; }
+    public bool[] MBPressed { get; private set; }
+    public bool[] MBReleased { get; private set; }
+    public bool[] MBHeld { get; private set; }
+
+    public bool IsHoldingObj
+    {
+        get
+        {
+            if (HeldObj == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+    }
     #endregion
 
     #region Methods
@@ -29,77 +43,71 @@ public class Player : MonoBehaviour
         //Cursor.visible = false;
 
         collisionSorter = new CollisionSorter();
-        heldObj = null;
-        mousePos = Vector2.zero;
+        HeldObj = null;
+        MousePos = Vector2.zero;
         contactFilter = new ContactFilter2D();
         MBPressed = new bool[2];
         MBReleased = new bool[2];
-
-        player = new PlayerState(MBPressed, MBReleased, mousePos, heldObj);  
+        MBHeld = new bool[2];
     }
 
-    // Finds the top Z object to interact with, and ignores all others.
-    private ObjInterface? GetTopCollision()
+    /// <summary>
+    /// Displays the player input
+    /// </summary>
+    private void DisplayInput()
     {
-        List<Collider2D> results = new();
+        Debug.Log($"");
+    }
+
+    /// <summary>
+    /// Finds the top Z object to interact with, and ignores all others.
+    /// </summary>
+    /// <returns></returns>
+    private WorldObject? GetTopCollision()
+    {
+        List<Collider2D> results = new List<Collider2D>();
         Physics2D.OverlapPoint(transform.position, contactFilter.NoFilter(), results);
+
         results.Sort(collisionSorter);
+
         foreach (Collider2D col in results)
         {
-            if (col == null) continue;
-
-            ObjInterface obj = col.gameObject.GetComponent<ObjInterface>();
-            if (obj == null) continue;
-            return obj;
+            if (col != null)
+            {
+                WorldObject obj = col.gameObject.GetComponent<WorldObject>();
+                return obj;
+            }
         }
+
         return null;
     }
 
-    private bool IsHoldingObj()
+    private void GrabObj(WorldObject obj)
     {
-        if (heldObj == null)
-        {
-            return false;
-        }
-
-        return true;
-    }
-
-    // Methods callable by the held objects
-    private bool GrabObj(ObjInterface? obj)
-    {
-        MoveableObj? mObj = obj as MoveableObj;
-        if (mObj == null)
-        {
-            return false;
-        }
-        
-        heldObj = mObj;
-        heldObj.PickUpObj(player);
-        return true;
+        HeldObj = obj;
+        HeldObj.PickedUp(this);
+        Debug.Log("Is this being called every frame?");
     }
 
     // Probably not the optimal way to do this
     private void DropObj()
     {
-        heldObj?.SetDownObject();
-        heldObj = null;
+        HeldObj.SetDown();
+        HeldObj = null;
     }
     #endregion
 
     #region public
     public void OnMouseMove(InputAction.CallbackContext ctx)
     {
-        mousePos = Camera.main.ScreenToWorldPoint(ctx.ReadValue<Vector2>());
-        transform.position = mousePos;
+        MousePos = Camera.main.ScreenToWorldPoint(ctx.ReadValue<Vector2>());
+        transform.position = MousePos;
 
         // Update the location of a held object
-        if (IsHoldingObj())
+        if (IsHoldingObj)
         {
-            heldObj?.UpdateMousePosition(mousePos);
+            HeldObj.Move(MousePos);
         }
-
-        player = new PlayerState(MBPressed, MBReleased, mousePos, heldObj);
     }
 
     public void OnMousePrimary(InputAction.CallbackContext ctx)
@@ -121,17 +129,18 @@ public class Player : MonoBehaviour
             MBReleased[0] = false;
         }
 
-        if (IsHoldingObj() && ctx.canceled)
+        if (IsHoldingObj && ctx.performed)
         {
             DropObj();
         }
-        else if (!IsHoldingObj() && ctx.performed)
+        else if (!IsHoldingObj && ctx.performed)
         {
-            ObjInterface? obj = GetTopCollision();
-            GrabObj(obj);
+            WorldObject? obj = GetTopCollision();
+            if (obj != null)
+            {
+                GrabObj(obj);
+            }
         }
-
-        player = new PlayerState(MBPressed, MBReleased, mousePos, heldObj);
     }
 
     public void OnMouseSecondary(InputAction.CallbackContext ctx)
@@ -154,12 +163,10 @@ public class Player : MonoBehaviour
         }
 
         // Use the object being held
-        if (IsHoldingObj())
+        if (IsHoldingObj)
         {
-            heldObj?.GetInput(player);
+            HeldObj?.GetInput(this);
         }
-
-        player = new PlayerState(MBPressed, MBReleased, mousePos, heldObj);
     }
 
     public void QuitGame(InputAction.CallbackContext ctx)

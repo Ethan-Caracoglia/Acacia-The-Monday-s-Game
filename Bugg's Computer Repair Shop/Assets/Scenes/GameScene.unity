@@ -266,8 +266,8 @@ GameObject:
   m_Component:
   - component: {fileID: 517167033}
   - component: {fileID: 517167034}
-  - component: {fileID: 517167035}
   - component: {fileID: 517167036}
+  - component: {fileID: 517167035}
   m_Layer: 0
   m_Name: Computer_Hinge
   m_TagString: Untagged
@@ -396,17 +396,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 517167032}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c2b689675ae7f44981c917cb77da143, type: 3}
+  m_Script: {fileID: 11500000, guid: 423d88368533d514bbf35956f4684dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: ComputerHinge
   covered: 0
-  childObjs: []
+  children: []
   sprite: {fileID: 21300000, guid: 12dc06e8c289e3643b50bb0a022155d1, type: 3}
   highlightSprite: {fileID: 21300000, guid: c4ed63fd2d197b842b1f29a3b5f2fb20, type: 3}
   snapped: 1
   coveredObjs: []
-  snapDistance: 0.02
+  snapDistance: 0.01
 --- !u!1 &576361128
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,9 +435,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 517167033}
   - {fileID: 2083173535}
-  - {fileID: 930387620}
+  - {fileID: 517167033}
   - {fileID: 2066335437}
   - {fileID: 980421153}
   m_Father: {fileID: 0}
@@ -453,8 +451,8 @@ GameObject:
   m_Component:
   - component: {fileID: 837145968}
   - component: {fileID: 837145967}
-  - component: {fileID: 837145966}
   - component: {fileID: 837145969}
+  - component: {fileID: 837145970}
   m_Layer: 0
   m_Name: Lighter
   m_TagString: Untagged
@@ -462,27 +460,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &837145966
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 837145965}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76fe74886b95d13438ecc9eb6a14f107, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 
-  covered: 0
-  childObjs: []
-  sprite: {fileID: 0}
-  highlightSprite: {fileID: 0}
-  snapped: 1
-  coveredObjs: []
-  snapDistance: 0.01
-  active: {fileID: 0}
 --- !u!212 &837145967
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -595,6 +572,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.3856709, y: 0.8224364}
   m_EdgeRadius: 0
+--- !u!114 &837145970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837145965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f1df416e37eb9d459347f5e4d775301, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  covered: 0
+  children: []
+  sprite: {fileID: 21300000, guid: f1f35b0eb39f8a04891a9c7c450e157c, type: 3}
+  highlightSprite: {fileID: 21300000, guid: 4eba9876323896e47b817b5a2d8013d3, type: 3}
+  snapped: 1
+  coveredObjs: []
+  snapDistance: 0.01
 --- !u!1 &930387619
 GameObject:
   m_ObjectHideFlags: 0
@@ -623,12 +619,12 @@ Transform:
   m_GameObject: {fileID: 930387619}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1143129985}
-  m_Father: {fileID: 576361129}
+  m_Father: {fileID: 2066335437}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &930387621
 SpriteRenderer:
@@ -736,17 +732,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 930387619}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c2b689675ae7f44981c917cb77da143, type: 3}
+  m_Script: {fileID: 11500000, guid: 423d88368533d514bbf35956f4684dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: Computer_CPU
   covered: 0
-  childObjs: []
+  children: []
   sprite: {fileID: 21300000, guid: c81a9dfbce1e0964981be8585ce5aa3f, type: 3}
   highlightSprite: {fileID: 21300000, guid: 8a49f56f3dd1fd14094c29e90f9580c2, type: 3}
   snapped: 1
   coveredObjs: []
-  snapDistance: 0.02
+  snapDistance: 0.01
 --- !u!1 &980421152
 GameObject:
   m_ObjectHideFlags: 0
@@ -757,8 +752,8 @@ GameObject:
   m_Component:
   - component: {fileID: 980421153}
   - component: {fileID: 980421154}
-  - component: {fileID: 980421156}
   - component: {fileID: 980421157}
+  - component: {fileID: 980421158}
   m_Layer: 0
   m_Name: Computer_ExtraUnit
   m_TagString: Untagged
@@ -833,26 +828,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &980421156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 980421152}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c2b689675ae7f44981c917cb77da143, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: Computer_Extra
-  covered: 0
-  childObjs: []
-  sprite: {fileID: 21300000, guid: 50f5b78e1cab8044bb9ee90b8e21516d, type: 3}
-  highlightSprite: {fileID: 21300000, guid: 26b6828e253fe924dafd770dbb447035, type: 3}
-  snapped: 1
-  coveredObjs: []
-  snapDistance: 0.02
 --- !u!61 &980421157
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -898,6 +873,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.3466875, y: 0.26864028}
   m_EdgeRadius: 0
+--- !u!114 &980421158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 980421152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 423d88368533d514bbf35956f4684dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  covered: 0
+  children: []
+  sprite: {fileID: 21300000, guid: 50f5b78e1cab8044bb9ee90b8e21516d, type: 3}
+  highlightSprite: {fileID: 21300000, guid: 26b6828e253fe924dafd770dbb447035, type: 3}
+  snapped: 1
+  coveredObjs: []
+  snapDistance: 0.01
 --- !u!1 &997582790
 GameObject:
   m_ObjectHideFlags: 0
@@ -2040,7 +2034,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 930387620}
   m_Father: {fileID: 576361129}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2066335438
@@ -2149,17 +2144,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2066335436}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c2b689675ae7f44981c917cb77da143, type: 3}
+  m_Script: {fileID: 11500000, guid: 423d88368533d514bbf35956f4684dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: Computer_Motherboard
   covered: 0
-  childObjs: []
+  children: []
   sprite: {fileID: 21300000, guid: 2f7827bafdf048d429012676854da11b, type: 3}
   highlightSprite: {fileID: 21300000, guid: 325b30dcadf22614eac76d16d15331da, type: 3}
   snapped: 1
   coveredObjs: []
-  snapDistance: 0.02
+  snapDistance: 0.01
 --- !u!1 &2067602818
 GameObject:
   m_ObjectHideFlags: 0
@@ -2261,7 +2255,7 @@ MonoBehaviour:
   - {fileID: 517167036}
   - {fileID: 930387623}
   - {fileID: 2066335440}
-  - {fileID: 980421156}
+  - {fileID: 980421158}
   iceCount: 1
   won: 0
   victory: {fileID: 2067602819}
