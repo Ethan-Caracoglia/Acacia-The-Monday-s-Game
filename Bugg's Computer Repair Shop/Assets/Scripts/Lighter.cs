@@ -54,7 +54,7 @@ public class Lighter : WorldObject
         if (timeSinceLastAction >= interval)
         {
             timeSinceLastAction = 0f;
-            Instantiate(flameParticle).transform.position = new Vector3(0.03f, 0.2f, transform.position.z) + new Vector3(transform.position.x + Random.Range(-0.02f, 0.02f), transform.position.y + Random.Range(-0.02f, 0.02f), 0);
+            Instantiate(flameParticle).transform.position = new Vector3(0.05f, 0.24f, transform.position.z) + new Vector3(transform.position.x + Random.Range(-0.02f, 0.02f), transform.position.y + Random.Range(-0.02f, 0.02f), 0);
         }
     }
 }
