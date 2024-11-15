@@ -7,6 +7,7 @@ public class Lighter : WorldObject
     public GameObject flameParticle;
     public float interval = 0.5f;
     private float timeSinceLastAction = 0f;
+    private bool isHeld;
 
     public override void GetInput(Player player)
     {
@@ -22,6 +23,13 @@ public class Lighter : WorldObject
             gameObject.GetComponent<SpriteRenderer>().sprite = sprite;
         }
     }
+    private void Update()
+    {
+        if (isHeld)
+        {
+            HeldUse();
+        }
+    }
 
     protected override void HeldUse(Player player)
     {
@@ -30,7 +38,7 @@ public class Lighter : WorldObject
         if (timeSinceLastAction >= interval)
         {
             timeSinceLastAction = 0f;
-            Instantiate(flameParticle).transform.position = new Vector3(0.03f, 0.2f, 0f) + new Vector3(transform.position.x + Random.Range(-0.02f, 0.02f), transform.position.y + Random.Range(-0.02f, 0.02f), 0);
+            Instantiate(flameParticle).transform.position = new Vector3(0.03f, 0.2f, transform.position.z) + new Vector3(transform.position.x + Random.Range(-0.02f, 0.02f), transform.position.y + Random.Range(-0.02f, 0.02f), 0);
         }
     }
 }

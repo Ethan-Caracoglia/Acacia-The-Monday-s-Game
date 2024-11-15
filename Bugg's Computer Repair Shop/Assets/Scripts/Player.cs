@@ -105,7 +105,7 @@ public class Player : MonoBehaviour
         // Update the location of a held object
         if (IsHoldingObj)
         {
-            HeldObj.Move(MousePos);
+            HeldObj!.Move(MousePos);
         }
     }
 
