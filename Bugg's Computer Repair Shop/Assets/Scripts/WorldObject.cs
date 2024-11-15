@@ -6,24 +6,18 @@ public class WorldObject : MonoBehaviour
 {
     #region Fields
     public bool covered = false;
-    public WorldObject[] children;
-
     public Sprite sprite; // Base sprite 
     public Sprite highlightSprite;
     public bool snapped = true;
-    public WorldObject[] coveredObjs;
-
-    [SerializeField] protected float snapDistance = 0.01f;
+    
     protected bool dragging = false;
     protected Vector3 offset;
     protected Vector3 snapPosition;
+    [SerializeField] protected float snapDistance = 0.01f;
     [SerializeField] protected Collider2D objCollider;
-
-    protected Dictionary<string, Vector3> offsets = new Dictionary<string, Vector3>();
     #endregion
 
     #region Properties
-    public bool IsTool { get; private set; }
     public bool IsMoveable { get; private set; }
     #endregion
 
@@ -111,7 +105,7 @@ public class WorldObject : MonoBehaviour
     #endregion
 
     #region protected
-    public void Move(Vector3 newPos)
+    public virtual void Move(Vector3 newPos)
     {
         // Potentially make this move to top Z value and drop down?
         transform.position = offset + new Vector3(newPos.x, newPos.y, transform.position.z);
