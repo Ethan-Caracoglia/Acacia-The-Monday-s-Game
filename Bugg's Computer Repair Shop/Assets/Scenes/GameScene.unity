@@ -122,6 +122,73 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &450975227
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 450975229}
+  - component: {fileID: 450975228}
+  m_Layer: 6
+  m_Name: Flame
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!58 &450975228
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 450975227}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
+--- !u!4 &450975229
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 450975227}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.113, y: 0.449, z: 2}
+  m_LocalScale: {x: 0.19, y: 0.19, z: 0.19}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 837145968}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &515495284
 GameObject:
   m_ObjectHideFlags: 0
@@ -520,10 +587,11 @@ Transform:
   m_GameObject: {fileID: 837145965}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.957, y: 0.092, z: 0}
+  m_LocalPosition: {x: -1.422, y: -0.156, z: -3}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 450975229}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &837145969
@@ -590,6 +658,9 @@ MonoBehaviour:
   snapDistance: 0.01
   objCollider: {fileID: 837145969}
   flameParticle: {fileID: 706130916511203306, guid: 2dd2aa147f516974ba0f73df4af77137, type: 3}
+  ice: {fileID: 1143129983}
+  iceCollider: {fileID: 1143129986}
+  flame: {fileID: 450975228}
   interval: 0.02
 --- !u!1 &930387619
 GameObject:
@@ -1038,7 +1109,7 @@ GameObject:
   - component: {fileID: 1143129984}
   - component: {fileID: 1143129983}
   - component: {fileID: 1143129986}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1057,11 +1128,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b87b5079fe5da74a9f927560d67c376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spr: {fileID: 0}
+  spr: {fileID: 1143129984}
   meltRate: 0.1
   minSize: 0.3
-  lighterOff: {fileID: 21300000, guid: f1f35b0eb39f8a04891a9c7c450e157c, type: 3}
-  lighterOn: {fileID: 21300000, guid: 4eba9876323896e47b817b5a2d8013d3, type: 3}
   b: {fileID: 2067602821}
 --- !u!212 &1143129984
 SpriteRenderer:

@@ -1,3 +1,13 @@
+Build 4:
+-Cut out unecessary scripts
+-Made a WorldObject and Lighter script to greatly reduce code complexity
+-Added particle effects to the lighter
+-Actually finished refactoring code this time
+-Freed up two teammates to develop new features
+-Changed how object interaction works
+-Updated Menu & Dialogue scenes
+-Added new font to UI
+
 Refactored single "Moveable Object" class into like, a lot of interfaces
 -IInteractable: Defines an object as interactable with the mouse, determines how to handle any given input from the mouse
 -MoveMouse: Sends interaction states to the top Z most IInteractable in the scene (allows us to have multiple interactable objects stacked on eachother
