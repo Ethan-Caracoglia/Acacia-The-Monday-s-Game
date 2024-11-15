@@ -162,7 +162,7 @@ public class Player : MonoBehaviour
         }
 
         // Use the object being held
-        if (IsHoldingObj && !MBReleased[1])
+        if (IsHoldingObj)
         {
             HeldObj.GetInput(this);
         }
