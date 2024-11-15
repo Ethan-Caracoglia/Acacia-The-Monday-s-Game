@@ -29,6 +29,7 @@ public class MoveableObj : ObjInterface
     #region public
     public override void ParentPositionChange(Vector3 newPos)
     {
+        Debug.Log("Parent Moving");
         snapPosition = newPos;
         if (snapped)
         {

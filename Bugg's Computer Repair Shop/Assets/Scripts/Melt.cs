@@ -54,7 +54,6 @@ public class Melt : MonoBehaviour
     //prebuilt method, Checks for hovering on the collider.
     private void OnMouseOver()
     {
-        Debug.Log("MouseOver");
         //check if the left click is down
         if (isMouseDown)
         {
