@@ -73,7 +73,7 @@ public class WorldObject : MonoBehaviour
     /// <summary>
     /// Sets down an object
     /// </summary>
-    public void SetDown()
+    public virtual void SetDown()
     {
         Debug.Log("Drop Obj");
         if (dragging == false)
@@ -96,12 +96,6 @@ public class WorldObject : MonoBehaviour
         // Potentially make this move to top Z value and drop down?
         transform.position = offset + new Vector3(newPos.x, newPos.y, transform.position.z);
     }
-
-    /// <summary>
-    /// When held, accepts mouse input. Override when needed.
-    /// </summary>
-    /// <param name="button">Button Pressed</param>
-    protected virtual void HeldUse(Player player) {}
     #endregion
     #endregion
 }

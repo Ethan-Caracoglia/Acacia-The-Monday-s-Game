@@ -91,7 +91,7 @@ public class Player : MonoBehaviour
     // Probably not the optimal way to do this
     private void DropObj()
     {
-        HeldObj.SetDown();
+        HeldObj?.SetDown();
         HeldObj = null;
     }
     #endregion

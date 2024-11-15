@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FlameParticle : MonoBehaviour
 {
-    float timeAlive = 0.7f;
+    float timeAlive = 0.2f;
     float curTimeAlive;
     [SerializeField] SpriteRenderer spriteRenderer;
     float minInitSpeed = 2f;
