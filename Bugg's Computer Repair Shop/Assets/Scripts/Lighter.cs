@@ -7,6 +7,7 @@ public class Lighter : WorldObject
 {
     public GameObject flameParticle;
     public Melt ice;
+    public Collider2D iceCollider;
     public Collider2D flame;
     public float interval = 0.5f;
     private float timeSinceLastAction = 0f;
@@ -38,9 +39,9 @@ public class Lighter : WorldObject
     {
         Debug.Log("Lighter GetInput()");
         beingUsed = !player.MBReleased[1];
-        if (beingUsed)
+        if (beingUsed && flame.bounds.Intersects(iceCollider.bounds))
         {
-            if () {
+            ice.Melting();
         }
         else
         {
