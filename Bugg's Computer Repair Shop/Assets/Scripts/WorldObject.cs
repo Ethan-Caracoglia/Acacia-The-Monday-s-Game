@@ -17,7 +17,7 @@ public class WorldObject : MonoBehaviour
     protected bool dragging = false;
     protected Vector3 offset;
     protected Vector3 snapPosition;
-    protected Collider2D objCollider;
+    [SerializeField] protected Collider2D objCollider;
 
     protected Dictionary<string, Vector3> offsets = new Dictionary<string, Vector3>();
     #endregion
@@ -31,7 +31,7 @@ public class WorldObject : MonoBehaviour
     #region private
     private void Start()
     {
-        objCollider = GetComponent<Collider2D>();
+        //objCollider = GetComponent<Collider2D>();
 
         snapPosition = transform.position;
     }
