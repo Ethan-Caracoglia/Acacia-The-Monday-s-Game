@@ -21,10 +21,6 @@ public class Lighter : WorldObject
         {
             HeldUse();
         }
-        if (isMelting)
-        {
-            ice.Melting();
-        }
     }
 
     public override void SetDown()
@@ -39,18 +35,16 @@ public class Lighter : WorldObject
     {
         Debug.Log("Lighter GetInput()");
         beingUsed = !player.MBReleased[1];
-        if (beingUsed && flame.bounds.Intersects(iceCollider.bounds))
-        {
-            ice.Melting();
-        }
-        else
-        {
-            gameObject.GetComponent<SpriteRenderer>().sprite = sprite;
-        }
     }
 
     protected void HeldUse()
     {
+        if (flame.bounds.Intersects(iceCollider.bounds))
+        {
+            Debug.Log("Melting");
+            ice.Melting();
+        }
+
         timeSinceLastAction += Time.deltaTime;
         if (timeSinceLastAction >= interval)
         {
