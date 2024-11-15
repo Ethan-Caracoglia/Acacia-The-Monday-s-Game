@@ -9,14 +9,6 @@ public class Lighter : WorldObject
     public float interval = 0.5f;
     private float timeSinceLastAction = 0f;
     private bool isMelting;
-
-    private void Update()
-    {
-        if (isMelting)
-        {
-            ice.Melting();
-        }
-    }
     private bool isHeld;
 
     public override void GetInput(Player player)
