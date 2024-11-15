@@ -39,10 +39,13 @@ public class Lighter : WorldObject
 
     protected void HeldUse()
     {
-        if (flame.bounds.Intersects(iceCollider.bounds))
+        if (iceCollider != null)
         {
-            Debug.Log("Melting");
-            ice.Melting();
+            if (flame.bounds.Intersects(iceCollider.bounds))
+            {
+                Debug.Log("Melting");
+                ice.Melting();
+            }
         }
 
         timeSinceLastAction += Time.deltaTime;
