@@ -7,6 +7,7 @@ public class Lighter : WorldObject
 {
     public GameObject flameParticle;
     public Melt ice;
+    public Collider2D flame;
     public float interval = 0.5f;
     private float timeSinceLastAction = 0f;
     private bool isMelting;
@@ -15,7 +16,7 @@ public class Lighter : WorldObject
 
     private void Update()
     {
-        if ((beingUsed))
+        if (beingUsed)
         {
             HeldUse();
         }
@@ -24,7 +25,6 @@ public class Lighter : WorldObject
             ice.Melting();
         }
     }
-
 
     public override void SetDown()
     {
@@ -40,7 +40,7 @@ public class Lighter : WorldObject
         beingUsed = !player.MBReleased[1];
         if (beingUsed)
         {
-            gameObject.GetComponent<SpriteRenderer>().sprite = highlightSprite;
+            if () {
         }
         else
         {
