@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +10,6 @@ public class Lighter : WorldObject
 
     public override void GetInput(Player player)
     {
-        Console.WriteLine("GAGGABOO");
         if (player.MBHeld[1])
         {
             HeldUse(player);
