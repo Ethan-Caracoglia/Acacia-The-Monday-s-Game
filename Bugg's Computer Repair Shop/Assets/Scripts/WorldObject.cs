@@ -55,10 +55,7 @@ public class WorldObject : MonoBehaviour
     /// Grabs Playe
     /// </summary>
     /// <param name="player"></param>
-    public virtual void GetInput(Player player)
-    {
-
-    }
+    public virtual void GetInput(Player player) {}
 
     /// <summary>
     /// Picks up an object
@@ -89,7 +86,6 @@ public class WorldObject : MonoBehaviour
         {
             Move(snapPosition - offset);
             snapped = true;
-
         }
     }
     #endregion
@@ -105,10 +101,7 @@ public class WorldObject : MonoBehaviour
     /// When held, accepts mouse input. Override when needed.
     /// </summary>
     /// <param name="button">Button Pressed</param>
-    protected virtual void HeldUse(Player player)
-    {
-
-    }
+    protected virtual void HeldUse(Player player) {}
     #endregion
     #endregion
 }
