@@ -89,7 +89,7 @@ public class UImanager : MonoBehaviour
         {
             //objectives.text = "Objectives:\r\nMelt the Ice\r\nReassemble and Close";
             // Placeholder text until Objective list UI is updated
-            objectives.text = $"Objectives:\r\nOpen Case - Score:{s.ObjectivesScore[0]}\r\nMelt the Ice\r\nReassemble and Close";
+            objectives.text = $"Objectives:\r\n<s>Open Case </s> - Score:{s.ObjectivesScore[0]}\r\nMelt the Ice\r\nReassemble and Close";
             objectiveNum++;
         }
 
@@ -98,7 +98,7 @@ public class UImanager : MonoBehaviour
         {
             //objectives.text = "Objectives:\r\nReassemble and Close";
             // Placeholder text until Objective list UI is updated
-            objectives.text = $"Objectives:\r\nOpen Case - Score:{s.ObjectivesScore[0]}\r\nMelt the Ice - Score:{s.ObjectivesScore[1]}\r\nReassemble and Close";
+            objectives.text = $"Objectives:\r\n<s>Open Case </s> - Score:{s.ObjectivesScore[0]}\r\n<s>Melt the Ice </s> - Score:{s.ObjectivesScore[1]}\r\nReassemble and Close";
             objectiveNum++;
         }
 
@@ -107,7 +107,7 @@ public class UImanager : MonoBehaviour
         {
             //objectives.text = "Objectives complete!";
             // Placeholder text until Objective list UI is updated
-            objectives.text = $"Objectives:\r\nOpen Case - Score:{s.ObjectivesScore[0]}\r\nMelt the Ice - Score:{s.ObjectivesScore[1]}\r\nReassemble and Close - Score:{s.ObjectivesScore[2]}";
+            objectives.text = $"Objectives:\r\n<s>Open Case </s> - Score:{s.ObjectivesScore[0]}\r\n<s>Melt the Ice </s> - Score:{s.ObjectivesScore[1]}\r\n<s>Reassemble and Close </s> - Score:{s.ObjectivesScore[2]}";
             objectiveNum++;
         }
     }
