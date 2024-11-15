@@ -76,7 +76,7 @@ public class WorldObject : MonoBehaviour
         objCollider.enabled = false;
         dragging = true;
         snapped = false;
-        offset = transform.position - player.MousePos;
+        offset = new Vector3(transform.position.x, transform.position.y, 0) - new Vector3(player.MousePos.x, player.MousePos.y, 0);
     }
 
     /// <summary>
