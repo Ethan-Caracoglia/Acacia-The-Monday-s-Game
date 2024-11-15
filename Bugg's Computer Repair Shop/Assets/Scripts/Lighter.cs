@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class Lighter : WorldObject
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject flameParticle;
+    public float interval = 0.5f;
+    private float timeSinceLastAction = 0f;
+
+    public override void GetInput(Player player) 
     {
-        
+        if (player.MBHeld[1])
+        {
+            HeldUse(player);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void HeldUse(Player player)
     {
-        
+        timeSinceLastAction += Time.deltaTime;
+        if (timeSinceLastAction >= interval)
+        {
+            timeSinceLastAction = 0f;
+            Instantiate(flameParticle);
+        }
     }
 }
