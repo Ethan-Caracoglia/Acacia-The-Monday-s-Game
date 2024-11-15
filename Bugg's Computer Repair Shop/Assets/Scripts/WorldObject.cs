@@ -89,17 +89,7 @@ public class WorldObject : MonoBehaviour
         {
             Move(snapPosition - offset);
             snapped = true;
-            foreach (var mObj in coveredObjs)
-            {
-                mObj.covered = true;
-            }
-        }
-        else
-        {
-            foreach (var mObj in coveredObjs)
-            {
-                mObj.covered = false;
-            }
+
         }
     }
     #endregion
