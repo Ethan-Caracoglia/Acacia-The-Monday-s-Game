@@ -6,6 +6,7 @@ using UnityEngine;
 public class Lighter : WorldObject
 {
     public GameObject flameParticle;
+    // Make Array, melt has collider ref
     public Melt ice;
     public Collider2D iceCollider;
     public Collider2D flame;
@@ -39,6 +40,8 @@ public class Lighter : WorldObject
 
     protected void HeldUse()
     {
+        //Check if on Computer
+        //foreach
         if (iceCollider != null)
         {
             if (flame.bounds.Intersects(iceCollider.bounds))
