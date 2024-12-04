@@ -36,12 +36,15 @@ public class BasicWin : MonoBehaviour
             delay -= 1 * Time.deltaTime;
             if (delay < 0)
             {
-                fader.gameObject.SetActive(true);
-                LeanTween.scale(fader, Vector3.zero, 0);
-                LeanTween.scale(fader, new Vector3(1, 1, 1), 0.5f).setEase(LeanTweenType.easeInOutExpo).setOnComplete(() =>
+                if (!fader.gameObject.active)
                 {
-                    Invoke("LoadGame", 0.5f);
-                });
+                    fader.gameObject.SetActive(true);
+                    LeanTween.scale(fader, Vector3.zero, 0);
+                    LeanTween.scale(fader, new Vector3(1, 1, 1), 0.5f).setEase(LeanTweenType.easeInOutExpo).setOnComplete(() =>
+                    {
+                        Invoke("LoadGame", 0.5f);
+                    });
+                }
             }
             return;
         }
