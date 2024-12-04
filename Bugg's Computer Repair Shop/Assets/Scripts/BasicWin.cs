@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BasicWin : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class BasicWin : MonoBehaviour
 
     #region private
     [SerializeField] SpriteRenderer victory;
+    [SerializeField] RectTransform fader;
+    [SerializeField] float delay = 3;
     #endregion
     #endregion
 
@@ -28,7 +31,20 @@ public class BasicWin : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (won) return;
+        if (won)
+        {
+            delay -= 1 * Time.deltaTime;
+            if (delay < 0)
+            {
+                fader.gameObject.SetActive(true);
+                LeanTween.scale(fader, Vector3.zero, 0);
+                LeanTween.scale(fader, new Vector3(1, 1, 1), 0.5f).setEase(LeanTweenType.easeInOutExpo).setOnComplete(() =>
+                {
+                    Invoke("LoadGame", 0.5f);
+                });
+            }
+            return;
+        }
         if (iceCount <= 0)
         {
             foreach (var part in parts)
@@ -45,6 +61,11 @@ public class BasicWin : MonoBehaviour
         {
             victory.enabled = true;
         }
+    }
+
+    private void LoadGame()
+    {
+        SceneManager.LoadScene(3);
     }
     #endregion
     #endregion
