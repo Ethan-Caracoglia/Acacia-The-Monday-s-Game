@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Charger : WorldObject
 {
@@ -11,62 +10,69 @@ public class Charger : WorldObject
 
     private bool beingUsed = false;
     private bool isPowerMeterActive = false;
+    private bool isIndicatorActive = false;
     private float powerMeterValue = 0f;
     private bool increasing = true;
-    [SerializeField] public GameObject powerMeterSlider;
+
+    [SerializeField] public GameObject powerMeterSprite; // The power meter bar background
+    [SerializeField] public GameObject indicatorSprite;
+    [SerializeField] public Transform powerIndicator; // The visual indicator (slider handle or cursor)
+    [SerializeField] public Transform powerBarStart; // Start position of the bar
+    [SerializeField] public Transform powerBarEnd; // End position of the bar
+
     public float timingThreshold = 0.2f; // Range for hitting the center
     public float centerPoint = 0.5f; // Center value of the meter
-    private bool hasProcessedClick = false; // Tracks if a right-click has been processed
 
     private void Start()
     {
-        powerMeterSlider.gameObject.SetActive(false); // Hide initially
+        powerMeterSprite.SetActive(false); // Hide initially
+        indicatorSprite.SetActive(false);
+        UpdatePowerMeterVisual();
     }
 
     private void Update()
     {
-        if (beingUsed)
-        {
-            HeldUse();
-        }
-
         if (isPowerMeterActive)
         {
             UpdatePowerMeter();
+        }
+
+        // Check for right-click release to stop the meter
+        if (Input.GetMouseButtonUp(1) && isPowerMeterActive)
+        {
+            CheckPowerMeterSuccess();
+            DeactivatePowerMeter();
         }
     }
 
     public override void SetDown()
     {
         base.SetDown();
-
         beingUsed = false;
-        isPowerMeterActive = false;
-        powerMeterSlider.gameObject.SetActive(false); // Hide power meter
-        hasProcessedClick = false; // Reset click tracking
+        DeactivatePowerMeter();
     }
 
     public override void GetInput(Player player)
     {
-        // Activate only on a single right-click while holding the charger
-        if (player.MBPressed[1] && !hasProcessedClick)
+        if (player.MBPressed[1] && !beingUsed)
         {
+            // Right-click pressed
             beingUsed = true;
-            hasProcessedClick = true; // Mark click as processed
-            ActivatePowerMeter();
+
+            // Ensure the charger is in contact with the part
+            if (chargedPart != null && charger.bounds.Intersects(chargedPart.bounds))
+            {
+                ActivatePowerMeter();
+            }
+            else
+            {
+                Debug.Log("Charger is not properly aligned with the part.");
+                beingUsed = false;
+            }
         }
         else if (!player.MBPressed[1])
         {
-            hasProcessedClick = false; // Reset when button is released
-        }
-    }
-
-    protected void HeldUse()
-    {
-        if (chargedPart != null && charger.bounds.Intersects(chargedPart.bounds))
-        {
-            Debug.Log("Charging in progress...");
-            ActivatePowerMeter();
+            beingUsed = false; // Reset when the button is released
         }
     }
 
@@ -75,15 +81,18 @@ public class Charger : WorldObject
         if (!isPowerMeterActive)
         {
             isPowerMeterActive = true;
+            isIndicatorActive = true;
             powerMeterValue = 0f;
             increasing = true;
-            powerMeterSlider.gameObject.SetActive(true); // Show power meter
+            powerMeterSprite.SetActive(true); // Show the power meter
+            indicatorSprite.SetActive(true);
+            UpdatePowerMeterVisual();
         }
     }
 
     private void UpdatePowerMeter()
     {
-        // Oscillate the power meter
+        // Oscillate the power meter value
         if (increasing)
         {
             powerMeterValue += Time.deltaTime / interval;
@@ -103,31 +112,43 @@ public class Charger : WorldObject
             }
         }
 
-        // Update the UI Slider
-        //powerMeterSlider.value = powerMeterValue;
+        // Update the visual representation
+        UpdatePowerMeterVisual();
+    }
 
-        // Check for player input to stop the meter
-        if (Input.GetMouseButtonDown(1)) // Right-click to stop the meter
+    private void UpdatePowerMeterVisual()
+    {
+        if (powerIndicator != null && powerBarStart != null && powerBarEnd != null)
         {
-            CheckPowerMeterSuccess();
+            // Interpolate the position of the indicator between the start and end of the bar
+            powerIndicator.position = Vector3.Lerp(
+                powerBarStart.position,
+                powerBarEnd.position,
+                powerMeterValue
+            );
         }
     }
 
     private void CheckPowerMeterSuccess()
     {
-        //isPowerMeterActive = false;
-        //powerMeterSlider.gameObject.SetActive(false); // Hide power meter
-
-        // Check if the player hit the center
+        // Determine success or failure
         if (Mathf.Abs(powerMeterValue - centerPoint) <= timingThreshold)
         {
             Debug.Log("Perfect Charge!");
-            // Add logic for a successful charge
+            // Logic for a successful charge can go here
         }
         else
         {
             Debug.Log("Failed Charge!");
-            // Add logic for failure
+            // Logic for a failed charge can go here
         }
+    }
+
+    private void DeactivatePowerMeter()
+    {
+        isPowerMeterActive = false;
+        isIndicatorActive = false;
+        powerMeterSprite.SetActive(false); // Hide the power meter
+        indicatorSprite.SetActive(false);
     }
 }
