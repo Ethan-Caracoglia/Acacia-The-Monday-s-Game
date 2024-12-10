@@ -99,6 +99,11 @@ public class Player : MonoBehaviour
     #region public
     public void OnMouseMove(InputAction.CallbackContext ctx)
     {
+        // Prevents the error from occuring when camera is null
+        if (Camera.main == null)
+        {
+            return;
+        }
         MousePos = Camera.main.ScreenToWorldPoint(ctx.ReadValue<Vector2>());
         transform.position = MousePos;
 
