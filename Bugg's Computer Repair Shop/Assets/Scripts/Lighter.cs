@@ -14,6 +14,8 @@ public class Lighter : WorldObject
     private float timeSinceLastAction = 0f;
     private bool isMelting;
     private bool beingUsed = false;
+    [SerializeField] float meltRate = 0.1f;
+    [SerializeField] float minSize = 0.1f;
 
 
     private void Update()
@@ -41,13 +43,21 @@ public class Lighter : WorldObject
     protected void HeldUse()
     {
         //Check if on Computer
-        //foreach
-        if (iceCollider != null)
+        for (int i = 0; i < ice.iceCubes.Count; i++)
         {
-            if (flame.bounds.Intersects(iceCollider.bounds))
+            if (flame.bounds.Intersects(ice.iceCubes[i].GetComponent<Collider2D>().bounds)) 
             {
-                Debug.Log("Melting");
-                ice.Melting();
+                float meltAmount = meltRate * Time.deltaTime;
+                ice.iceCubes[i].transform.localScale -= new Vector3(meltAmount, meltAmount, 0);
+            }
+
+            if (ice.iceCubes[i].transform.localScale.x <= minSize || ice.iceCubes[i].transform.localScale.y <= minSize)
+            {
+                Debug.Log("melted");
+                //check how big the gameobject is, if its not too tiny to reasonably click on, then start scaling it down
+                Destroy(ice.iceCubes[i]);
+                ice.iceCubes.RemoveAt(i);
+                i--;
             }
         }
 
