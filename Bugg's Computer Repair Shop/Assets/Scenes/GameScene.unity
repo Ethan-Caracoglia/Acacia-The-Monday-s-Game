@@ -919,6 +919,7 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 12dc06e8c289e3643b50bb0a022155d1, type: 3}
   highlightSprite: {fileID: 21300000, guid: c4ed63fd2d197b842b1f29a3b5f2fb20, type: 3}
   snapped: 1
+  snapChildren: []
   snapDistance: 0.01
   objCollider: {fileID: 517167035}
 --- !u!1 &576361128
@@ -952,6 +953,7 @@ Transform:
   m_Children:
   - {fileID: 2083173535}
   - {fileID: 517167033}
+  - {fileID: 930387620}
   - {fileID: 2066335437}
   - {fileID: 830050213}
   - {fileID: 980421153}
@@ -1107,7 +1109,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.38701144, y: 0.04807554}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1118,7 +1120,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.28, y: 1.28}
+  m_Size: {x: 0.3372051, y: 0.46827462}
   m_EdgeRadius: 0
 --- !u!114 &830050215
 MonoBehaviour:
@@ -1136,6 +1138,7 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: d43bfa6d1927b054cad60e1d22a50635, type: 3}
   highlightSprite: {fileID: 21300000, guid: d43bfa6d1927b054cad60e1d22a50635, type: 3}
   snapped: 1
+  snapChildren: []
   snapDistance: 0.01
   objCollider: {fileID: 830050214}
 --- !u!212 &830050216
@@ -1338,11 +1341,12 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: f1f35b0eb39f8a04891a9c7c450e157c, type: 3}
   highlightSprite: {fileID: 21300000, guid: 4eba9876323896e47b817b5a2d8013d3, type: 3}
   snapped: 1
+  snapChildren: []
   snapDistance: 0.01
   objCollider: {fileID: 837145969}
   flameParticle: {fileID: 706130916511203306, guid: 2dd2aa147f516974ba0f73df4af77137, type: 3}
   ice: {fileID: 1143129983}
-  iceCollider: {fileID: 1143129986}
+  iceCollider: {fileID: 0}
   flame: {fileID: 450975228}
   interval: 0.02
   meltRate: 0.1
@@ -1375,7 +1379,7 @@ Transform:
   m_GameObject: {fileID: 930387619}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1386,7 +1390,7 @@ Transform:
   - {fileID: 245097195}
   - {fileID: 193123053}
   - {fileID: 1879967363}
-  m_Father: {fileID: 2066335437}
+  m_Father: {fileID: 576361129}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &930387621
 SpriteRenderer:
@@ -1501,6 +1505,7 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: c81a9dfbce1e0964981be8585ce5aa3f, type: 3}
   highlightSprite: {fileID: 21300000, guid: 8a49f56f3dd1fd14094c29e90f9580c2, type: 3}
   snapped: 1
+  snapChildren: []
   snapDistance: 0.01
   objCollider: {fileID: 930387622}
 --- !u!1 &980421152
@@ -1650,6 +1655,7 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 50f5b78e1cab8044bb9ee90b8e21516d, type: 3}
   highlightSprite: {fileID: 21300000, guid: 26b6828e253fe924dafd770dbb447035, type: 3}
   snapped: 1
+  snapChildren: []
   snapDistance: 0.01
   objCollider: {fileID: 980421157}
 --- !u!1 &997582790
@@ -1882,7 +1888,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1143129985}
   - component: {fileID: 1143129983}
-  - component: {fileID: 1143129986}
   m_Layer: 6
   m_Name: Ice
   m_TagString: Untagged
@@ -1926,41 +1931,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 930387620}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &1143129986
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1143129982}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.47
 --- !u!1 &1163784704
 GameObject:
   m_ObjectHideFlags: 0
@@ -3016,6 +2986,7 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: a1fe8ee32458442409dc28a76c0125c1, type: 3}
   highlightSprite: {fileID: 21300000, guid: ec76aecb1f1868f4a99b47c2e9b73e1b, type: 3}
   snapped: 1
+  snapChildren: []
   snapDistance: 0.01
   objCollider: {fileID: 1888621353}
   win: {fileID: 2067602821}
@@ -3624,8 +3595,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 930387620}
+  m_Children: []
   m_Father: {fileID: 576361129}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2066335438
@@ -3741,6 +3711,8 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 2f7827bafdf048d429012676854da11b, type: 3}
   highlightSprite: {fileID: 21300000, guid: 325b30dcadf22614eac76d16d15331da, type: 3}
   snapped: 1
+  snapChildren:
+  - {fileID: 930387623}
   snapDistance: 0.01
   objCollider: {fileID: 2066335439}
 --- !u!1 &2067602818

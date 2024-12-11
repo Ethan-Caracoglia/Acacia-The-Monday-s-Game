@@ -11,9 +11,10 @@ public class WorldObject : MonoBehaviour
     public bool snapped = true;
     
     protected bool dragging = false;
-    protected Vector3 offset;
+    protected Vector3 offset = Vector3.zero;
     protected Vector3 snapPosition;
-    [SerializeField] protected float snapDistance = 0.01f;
+    [SerializeField] protected WorldObject[] snapChildren;
+    [SerializeField] protected float snapDistance = 0.03f;
     [SerializeField] protected Collider2D objCollider;
     #endregion
 
@@ -87,6 +88,12 @@ public class WorldObject : MonoBehaviour
             Move(snapPosition - offset);
             snapped = true;
         }
+
+        foreach (WorldObject w in snapChildren)
+        {
+            w.UpdateSnap(transform.position);
+        }
+        offset = Vector3.zero;
     }
     #endregion
 
@@ -95,7 +102,21 @@ public class WorldObject : MonoBehaviour
     {
         // Potentially make this move to top Z value and drop down?
         transform.position = offset + new Vector3(newPos.x, newPos.y, transform.position.z);
+        foreach (WorldObject w in snapChildren)
+        {
+            w.UpdateSnap(transform.position);
+        }
     }
+
+    public virtual void UpdateSnap(Vector3 newPos)
+    {
+        newPos =  new Vector3(newPos.x, newPos.y, transform.position.z);
+        snapPosition = newPos;
+        if(snapped)
+            Move(newPos);
+    }
+
+    //public virtual void Update
     #endregion
     #endregion
 }
