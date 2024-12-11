@@ -10,6 +10,7 @@ public class BasicWin : MonoBehaviour
     public WorldObject[] parts;
     public int iceCount = 1;
     public bool won = false;
+    public bool charged;
     #endregion
 
     #region private

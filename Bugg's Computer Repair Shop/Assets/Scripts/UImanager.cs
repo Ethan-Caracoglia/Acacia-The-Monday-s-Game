@@ -13,6 +13,7 @@ public class UImanager : MonoBehaviour
     private bool caseRemoved = false;
     private bool iceMelted = false;
     private bool partsReassembled = false;
+    [SerializeField] private bool powerCharged = false;
 
     public bool CaseRemoved
     {
@@ -26,6 +27,13 @@ public class UImanager : MonoBehaviour
         get
         {
             return iceMelted;
+        }
+    }
+    public bool PowerCharged
+    {
+        get
+        {
+            return powerCharged;
         }
     }
     public bool PartsReassembled
@@ -87,6 +95,11 @@ public class UImanager : MonoBehaviour
             partsReassembled = true;
         }
 
+        if (b.charged == true)
+        {
+            powerCharged = true;
+        }
+
         //Change the lines of text depending on if that objective is done or not. ObjectiveNum makes sure steps can only be completed one time and in order
 
         //Is the case open?
@@ -107,12 +120,20 @@ public class UImanager : MonoBehaviour
             objectiveNum++;
         }
 
-        //is the case Reassembled?
-        if (partsReassembled == true && objectiveNum == 2 && s.ObjectivesScore[2] != -1)
+        if (powerCharged == true && objectiveNum == 2 && s.ObjectivesScore[2] != -1)
         {
             //objectives.text = "Objectives complete!";
             // Placeholder text until Objective list UI is updated
-            objectives.text = $"Objectives:\r\n<s>Open Case </s> - Score:{s.ObjectivesScore[0]}\r\n<s>Melt the Ice </s> - Score:{s.ObjectivesScore[1]}\r\nCharge the Power\r\n<s>Reassemble and Close </s> - Score:{s.ObjectivesScore[2]}";
+            objectives.text = $"Objectives:\r\n<s>Open Case </s> - Score:{s.ObjectivesScore[0]}\r\n<s>Melt the Ice </s> - Score:{s.ObjectivesScore[1]}\r\n<s>Charge the Power</s> - Score:{s.ObjectivesScore[2]}\r\nReassemble and Close";
+            objectiveNum++;
+        }
+
+        //is the case Reassembled?
+        if (partsReassembled == true && objectiveNum == 3 && s.ObjectivesScore[3] != -1)
+        {
+            //objectives.text = "Objectives complete!";
+            // Placeholder text until Objective list UI is updated
+            objectives.text = $"Objectives:\r\n<s>Open Case </s> - Score:{s.ObjectivesScore[0]}\r\n<s>Melt the Ice </s> - Score:{s.ObjectivesScore[1]}\r\n<s>Charge the Power</s> - Score:{s.ObjectivesScore[2]}\r\n<s>Reassemble and Close </s> - Score:{s.ObjectivesScore[3]}";
             objectiveNum++;
         }
     }

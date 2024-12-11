@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Charger : WorldObject
 {
+    [SerializeField] BasicWin win;
     [SerializeField] public Collider2D charger;
     [SerializeField] public Collider2D chargedPart;
     public float interval = 0.5f;
@@ -13,6 +14,7 @@ public class Charger : WorldObject
     private bool isIndicatorActive = false;
     private float powerMeterValue = 0f;
     private bool increasing = true;
+    [SerializeField] private int chargeCount = 0;
 
     [SerializeField] public GameObject powerMeterSprite; // The power meter bar background
     [SerializeField] public GameObject indicatorSprite;
@@ -143,6 +145,11 @@ public class Charger : WorldObject
         {
             Debug.Log("Perfect Charge!");
             // Logic for a successful charge can go here
+            chargeCount++;
+            if (chargeCount == 3)
+            {
+                win.charged = true;
+            }
         }
         else
         {

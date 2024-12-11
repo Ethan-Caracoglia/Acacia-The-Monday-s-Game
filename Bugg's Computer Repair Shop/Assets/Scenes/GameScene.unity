@@ -1991,6 +1991,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87b3cda9fc96e314a9ea65008f75d17a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  powerCharged: 0
   objectives: {fileID: 515495286}
   b: {fileID: 2067602821}
   s: {fileID: 1163784707}
@@ -2026,7 +2027,7 @@ MonoBehaviour:
   objectivesScore: 
   objectivesProgress: 
   objectivesDelay: 
-  objectivesAmount: 3
+  objectivesAmount: 4
   timer: 0
   currentObjective: 0
   objectivesDone: 0
@@ -3017,9 +3018,11 @@ MonoBehaviour:
   snapped: 1
   snapDistance: 0.01
   objCollider: {fileID: 1888621353}
+  win: {fileID: 2067602821}
   charger: {fileID: 1888621353}
   chargedPart: {fileID: 830050214}
   interval: 1
+  chargeCount: 0
   powerMeterSprite: {fileID: 1972545178}
   indicatorSprite: {fileID: 1031731917}
   powerIndicator: {fileID: 1165205384}
@@ -3844,9 +3847,8 @@ MonoBehaviour:
   - {fileID: 980421158}
   iceCount: 1
   won: 0
+  charged: 0
   victory: {fileID: 2067602819}
-  fader: {fileID: 275271111}
-  delay: 3
 --- !u!1 &2083173533
 GameObject:
   m_ObjectHideFlags: 0

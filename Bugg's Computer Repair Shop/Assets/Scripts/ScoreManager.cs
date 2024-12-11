@@ -102,7 +102,9 @@ public class ScoreManager : MonoBehaviour
         objectivesProgress[0] = iceObjectives.CaseRemoved;
         objectivesProgress[1] = iceObjectives.IceMelted;
         objectivesDelay[1] = 6;
-        objectivesProgress[2] = iceObjectives.PartsReassembled;
+        objectivesProgress[2] = iceObjectives.PowerCharged;
+        objectivesDelay[2] = 3;
+        objectivesProgress[3] = iceObjectives.PartsReassembled;
         #endregion
 
         // Runs for each objective
