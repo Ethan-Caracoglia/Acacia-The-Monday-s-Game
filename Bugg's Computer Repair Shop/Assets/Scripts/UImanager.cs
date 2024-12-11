@@ -7,10 +7,12 @@ using UnityEngine.UIElements;
 
 public class UImanager : MonoBehaviour
 {
+    #region Fields
+    #region private
     //three objectives
-    bool caseRemoved = false;
-    bool iceMelted = false;
-    bool partsReassembled = false;
+    private bool caseRemoved = false;
+    private bool iceMelted = false;
+    private bool partsReassembled = false;
 
     public bool CaseRemoved
     {
@@ -35,7 +37,7 @@ public class UImanager : MonoBehaviour
     }
 
     //track which step you're on
-    int objectiveNum = 0;
+    private int objectiveNum = 0;
 
     //Get the UI spot for this text
     [SerializeField]
@@ -47,11 +49,14 @@ public class UImanager : MonoBehaviour
 
     //get the Score Manager script to pull the score list from
     [SerializeField]
-    ScoreManager s;
+    ScoreManager s; 
+    #endregion
+    #endregion
 
-
+    #region Methods
+    #region private
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         //fill text into the UI spot
         objectives.text = "Objectives:\r\nOpen Case\r\nMelt the Ice\r\nReassemble and Close";
@@ -60,7 +65,7 @@ public class UImanager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         //check if any objectives have been met
 
@@ -111,4 +116,6 @@ public class UImanager : MonoBehaviour
             objectiveNum++;
         }
     }
+    #endregion
+    #endregion
 }

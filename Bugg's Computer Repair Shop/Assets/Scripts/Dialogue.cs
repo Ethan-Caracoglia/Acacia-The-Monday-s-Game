@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class Dialogue : MonoBehaviour
 {
+
+    [SerializeField] RectTransform fader;
+
     public TextMeshProUGUI textComponent;
     public string[] lines;  // Make sure this is populated in the Inspector!
     public float textSpeed;
@@ -93,6 +96,16 @@ public class Dialogue : MonoBehaviour
     {
         dialogueEnded = true;
         Debug.Log("Dialogue ended.");
-        SceneManager.LoadScene(1);  // Load the next scene
+        fader.gameObject.SetActive(true);
+        LeanTween.scale(fader, Vector3.zero, 0);
+        LeanTween.scale(fader, new Vector3(1, 1, 1), 0.5f).setEase(LeanTweenType.easeInOutExpo).setOnComplete(() =>
+        {
+            Invoke("LoadGame", 0.5f);
+        });
+    }
+
+    private void LoadGame()
+    {
+        SceneManager.LoadScene(2);
     }
 }
