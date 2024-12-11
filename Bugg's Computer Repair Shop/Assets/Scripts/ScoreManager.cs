@@ -101,7 +101,7 @@ public class ScoreManager : MonoBehaviour
         #region Ice Minigame
         objectivesProgress[0] = iceObjectives.CaseRemoved;
         objectivesProgress[1] = iceObjectives.IceMelted;
-        objectivesDelay[1] = 4;
+        objectivesDelay[1] = 6;
         objectivesProgress[2] = iceObjectives.PartsReassembled;
         #endregion
 

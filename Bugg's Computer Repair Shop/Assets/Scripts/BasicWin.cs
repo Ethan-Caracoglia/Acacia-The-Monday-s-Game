@@ -14,8 +14,6 @@ public class BasicWin : MonoBehaviour
 
     #region private
     [SerializeField] SpriteRenderer victory;
-    [SerializeField] RectTransform fader;
-    [SerializeField] float delay = 3;
     #endregion
     #endregion
 
@@ -31,23 +29,6 @@ public class BasicWin : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (won)
-        {
-            delay -= 1 * Time.deltaTime;
-            if (delay < 0)
-            {
-                if (!fader.gameObject.active)
-                {
-                    fader.gameObject.SetActive(true);
-                    LeanTween.scale(fader, Vector3.zero, 0);
-                    LeanTween.scale(fader, new Vector3(1, 1, 1), 0.5f).setEase(LeanTweenType.easeInOutExpo).setOnComplete(() =>
-                    {
-                        Invoke("LoadGame", 0.5f);
-                    });
-                }
-            }
-            return;
-        }
         if (iceCount <= 0)
         {
             foreach (var part in parts)
