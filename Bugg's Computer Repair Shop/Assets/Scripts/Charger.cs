@@ -27,6 +27,7 @@ public class Charger : WorldObject
     {
         powerMeterSprite.SetActive(false); // Hide initially
         indicatorSprite.SetActive(false);
+        powerIndicator.gameObject.SetActive(false);
         UpdatePowerMeterVisual();
     }
 
@@ -81,11 +82,17 @@ public class Charger : WorldObject
         if (!isPowerMeterActive)
         {
             isPowerMeterActive = true;
-            isIndicatorActive = true;
             powerMeterValue = 0f;
             increasing = true;
-            powerMeterSprite.SetActive(true); // Show the power meter
+
+            // Show the power meter and indicator sprite
+            powerMeterSprite.SetActive(true);
             indicatorSprite.SetActive(true);
+
+            // Ensure the power indicator is shown when activated
+            powerIndicator.gameObject.SetActive(true);
+
+            // Call the visual update method to synchronize the meter
             UpdatePowerMeterVisual();
         }
     }
@@ -150,5 +157,6 @@ public class Charger : WorldObject
         isIndicatorActive = false;
         powerMeterSprite.SetActive(false); // Hide the power meter
         indicatorSprite.SetActive(false);
+        powerIndicator.gameObject.SetActive(false);
     }
 }
