@@ -49,6 +49,10 @@ public class Player : MonoBehaviour
         MBPressed = new bool[2];
         MBReleased = new bool[2];
         MBHeld = new bool[2];
+
+        InputAction quitAction = new InputAction(type: InputActionType.Button, binding: "<Keyboard>/q");
+        quitAction.performed += QuitGame;
+        quitAction.Enable();
     }
 
     /// <summary>
@@ -177,6 +181,7 @@ public class Player : MonoBehaviour
     {
         if (ctx.performed)
         {
+            Debug.Log("Quitting the game...");
             Application.Quit();
         }
     }
